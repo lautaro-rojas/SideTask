@@ -16,8 +16,25 @@
       {
         "command": "sidetask.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "sidetask.openFile"
+      },
+      {
+        "command": "sidetask.refresh",
+        "title": "Refrescar TODOs",
+        "icon": "$(refresh)"
       }
     ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "sidetask.refresh",
+          "when": "view == todo-tracker-view",
+          "group": "navigation"
+        }
+      ]
+    },
     "viewsContainers": {
       "activitybar": [
         {

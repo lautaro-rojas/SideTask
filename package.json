@@ -17,7 +17,24 @@
         "command": "sidetask.helloWorld",
         "title": "Hello World"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "todo-tracker-sidebar",
+          "title": "TODO Tracker",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "todo-tracker-sidebar": [
+        {
+          "id": "todo-tracker-view",
+          "name": "Project TODOs"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",

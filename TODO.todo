@@ -1,2 +1,16 @@
-En pa pc de casa instalar nodejs (npm) y npm install -g @vscode/vsce
+En pa pc de casa instalar nodejs (npm) y 
 Me quedé en en el publish del MVP
+
+1. npm install -g @vscode/vsce
+2. vsce login LautaroRojas
+opcional. vsce package - crea el archivo .vsix para instalarlo localmente
+3. vsce publish
+
+https://marketplace.visualstudio.com/manage/publishers/lautarorojas?noPrompt=true
+
+
+Próxima Actualización: Cuando quieras publicar la v0.2.0, solo tienes que:
+
+Cambiar el número de "version" en package.json (ej. a "0.2.0").
+
+Correr vsce publish 0.2.0 (o simplemente vsce publish y te lo sugerirá).

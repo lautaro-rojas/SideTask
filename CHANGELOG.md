@@ -14,6 +14,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [v0.1.2] - 2025-10-24
+This section documents all changes prepared for version v0.1.2.
+
+### Added
+
+### Fixed
+
+### Changed
+- **Icon:** Changed the marketplace icon.
+
 ## [v0.1.1] - 2025-10-24
 This section documents all changes prepared for version v0.1.1.
 
@@ -49,5 +59,6 @@ This section documents all changes prepared for version v0.1.0.
 
 [unreleased]: https://github.com/lautaro-rojas/SideTask
 [v0.2.0]: https://github.com/lautaro-rojas/SideTask
+[v0.1.2]: https://github.com/lautaro-rojas/SideTask
 [v0.1.1]: https://github.com/lautaro-rojas/SideTask
 [v0.1.0]: https://github.com/lautaro-rojas/SideTask

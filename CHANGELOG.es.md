@@ -29,12 +29,23 @@ Esta sección documenta todos los cambios preparados para la primera versión (v
 
 ### Removed
 -->
+## [v0.1.2] - 2025-10-24
+Esta sección documenta todos los cambios preparados para la versión v0.1.2.
+
+### Added
+
+### Fixed
+
+### Changed
+- **Icon:** Se cambia el icono de la tienda.
+
+### Removed
 
 ## [v0.1.1] - 2025-10-24
 Esta sección documenta todos los cambios preparados para la versión v0.1.1.
 
 ### Added
-- **README en Español:** Se añade un README en idioma Español (`README.es.md`)..
+- **README en Español:** Se añade un README en idioma Español (`README.es.md`).
 
 ### Fixed
 - **README:** Se actualiza la información del README default.
@@ -65,5 +76,6 @@ Esta sección documenta todos los cambios preparados para la versión v0.1.0.
 
 [unreleased]: https://github.com/lautaro-rojas/SideTask
 [v0.2.0]: https://github.com/lautaro-rojas/SideTask
+[v0.1.2]: https://github.com/lautaro-rojas/SideTask
 [v0.1.1]: https://github.com/lautaro-rojas/SideTask
 [v0.1.0]: https://github.com/lautaro-rojas/SideTask

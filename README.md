@@ -1,71 +1,65 @@
-# sidetask README
+# SideTask - All in one smart TODO Manager
 
-This is the  for your extension "sidetask". After writing up a brief description, we recommend including the following sections.
+<p align="center">
+  <img src="./images/LogoSideTask-SinFondo.png" alt="SideTask Logo" width="128"/>
+  <br/>
+  <strong>Your entire codebase's TODO list, in one place.</strong>
+</p>
 
-## Features
+<p align="center">
+  <a href="https://marketplace.visualstudio.com/items?itemName=LautaroRojas.sidetask">
+    <img src="https://img.shields.io/visual-studio-marketplace/v/LautaroRojas.sidetask?style=for-the-badge&label=Marketplace&color=blue" alt="Marketplace Version"/>
+  </a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=LautaroRojas.sidetask">
+    <img src="https://img.shields.io/visual-studio-marketplace/d/LautaroRojas.sidetask?style=for-the-badge&label=Installs" alt="Marketplace Installs"/>
+  </a>
+</p>
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+**SideTask** is a powerful VS Code extension that finds all the TODOs, FIXMEs, and other task comments scattered across your project and brings them into one organized view in your activity bar.
 
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Stop losing track of pending tasks and technical debt. If it's in your code, it's on your list.
 
 ---
 
-## Following extension guidelines
+## Features (MVP v0.1.0)
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+This is the first release of SideTask, focusing on the essential features to get you organized:
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+* **🌲 Unified Tree View:** See all found tasks in a clean, collapsible tree view, neatly organized by file.
+* **⌨️ Default Keywords:** Automatically scans your project for `TODO:`, `FIXME:`, and `HACK:`.
+* **🖱️ Click-to-Go:** Instantly jump to the exact line of any task in your code just by clicking on it in the side panel.
+* **🔄 Manual Refresh:** A simple "Refresh" button in the view's title bar to re-scan your workspace at any time.
 
-## Working with Markdown
+<!--
+![SideTask Screenshot (Demo)](URL_DEL_GIF_O_IMAGEN_DE_TU_EXTENSION_AQUI)
+*(Te recomiendo 100% que grabes un GIF corto mostrando la extensión en acción y reemplaces esta línea)*
+-->
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+## Getting Started
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+1.  Install the **SideTask** extension from the VS Code Marketplace.
+2.  Open a project.
+3.  Click on the new **SideTask icon** in your Activity Bar (the sidebar on the left).
+4.  The panel will automatically populate with all the tasks found in your code.
+5.  Click any task to jump straight to the file!
 
-## For more information
+## What's Next? (Roadmap)
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+SideTask is just getting started. Our goal is to make this the *ultimate* task management tool for developers, right inside the editor. Here is what's planned:
 
-**Enjoy!**
+* **✨ Custom Highlighting:** Define your own keywords (like `NOTE:`, `BUG:`) and give them custom colors.
+* **🎛️ Advanced Filtering:** Filter tasks by keyword, tag, or file.
+* **⚡ Smart Snippets:** Quickly create new TODO items with keyboard shortcuts.
+* **🚀 [PRO] Integrations:** Connect SideTask to your favorite tools like **Notion**, **Jira**, and **Trello** to turn code comments into real tasks.
+
+## Support the Project
+
+This is an indie project built with ❤️. If you find SideTask useful, please consider supporting its development:
+
+* Leave a ⭐️⭐️⭐️⭐️⭐️ rating on the [Marketplace](https://marketplace.visualstudio.com/items?itemName=LautaroRojas.sidetask).
+* Report bugs or request features on our [GitHub Issues](https://github.com/tu-usuario/sidetask/issues).
+* [Buy me a coffee!](https://buymeacoffee.com/lautarorojaso) 
+
+## License
+
+This extension is licensed under the [MIT License](LICENSE.md).

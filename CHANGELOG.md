@@ -16,6 +16,7 @@ y este proyecto se adhiere al [Versionado Semántico](https://semver.org/spec/v2
 - **Actualización Manual:** Se añade un botón de "Refrescar TODOs" (ícono 🔄) en la cabecera de la vista para forzar un re-escaneo.
 - **Actualización Automática:** La vista de TODOs se refresca automáticamente cada vez que se guarda un archivo en el editor (`onDidSaveTextDocument`).
 - **Panel de Configuración:** Se añade una sección "SideTask TODO Tracker" en la Configuración de VS Code.
+- **README:** Información en los README y se agrega compatibilidad con Español e Inglés.
 <!-- 
 - **Ajuste de Palabras Clave:** Se añade la configuración `sidetask.keywords` (con `["TODO", "FIXME", "HACK"]` por defecto) para que el usuario pueda personalizar los términos de búsqueda.
 -->
@@ -25,7 +26,7 @@ y este proyecto se adhiere al [Versionado Semántico](https://semver.org/spec/v2
 ### Removed
 
 <!-- 
-## [v0.2.0] - 2025-10-23
+## [v0.2.0] - 2025-10-DD
 Esta sección documenta todos los cambios preparados para la primera versión (v0.2.0).
 
 ### Added
@@ -37,8 +38,23 @@ Esta sección documenta todos los cambios preparados para la primera versión (v
 
 ### Removed
 -->
+
+## [v0.1.1] - 2025-10-24
+Esta sección documenta todos los cambios preparados para la versión v0.1.1.
+
+### Added
+- **README.es:** Se añade un README en idioma Español.
+
+### Fixed
+- **README:** Se actualiza la información del README.
+
+### Changed
+- **Icon:** Se cambia el icono de la tienda.
+
+### Removed
+
 ## [v0.1.0] - 2025-10-22
-Esta sección documenta todos los cambios preparados para la primera versión (v0.1.0).
+Esta sección documenta todos los cambios preparados para la versión v0.1.0.
 
 ### Added
 
@@ -58,4 +74,5 @@ Esta sección documenta todos los cambios preparados para la primera versión (v
 
 [unreleased]: https://github.com/lautaro-rojas/SideTask
 [v0.2.0]: https://github.com/lautaro-rojas/SideTask
+[v0.1.1]: https://github.com/lautaro-rojas/SideTask
 [v0.1.0]: https://github.com/lautaro-rojas/SideTask

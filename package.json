@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/lautaro-rojas/SideTask.git"
   },
-  "icon": "images/LogoSideTask-SinFondo.png",
+  "icon": "images/LogoSideTask-MejorRecortado.png",
   "engines": {
     "vscode": "^1.105.0"
   },

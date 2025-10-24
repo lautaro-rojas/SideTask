@@ -16,14 +16,15 @@ y este proyecto se adhiere al [Versionado Semántico](https://semver.org/spec/v2
 - **Actualización Manual:** Se añade un botón de "Refrescar TODOs" (ícono 🔄) en la cabecera de la vista para forzar un re-escaneo.
 - **Actualización Automática:** La vista de TODOs se refresca automáticamente cada vez que se guarda un archivo en el editor (`onDidSaveTextDocument`).
 - **Panel de Configuración:** Se añade una sección "SideTask TODO Tracker" en la Configuración de VS Code.
+<!-- 
 - **Ajuste de Palabras Clave:** Se añade la configuración `sidetask.keywords` (con `["TODO", "FIXME", "HACK"]` por defecto) para que el usuario pueda personalizar los términos de búsqueda.
-
+-->
 ### Changed
 
 
 ### Removed
 
-
+<!-- 
 ## [v0.2.0] - 2025-10-23
 Esta sección documenta todos los cambios preparados para la primera versión (v0.2.0).
 
@@ -35,7 +36,7 @@ Esta sección documenta todos los cambios preparados para la primera versión (v
 ### Changed
 
 ### Removed
-
+-->
 ## [v0.1.0] - 2025-10-22
 Esta sección documenta todos los cambios preparados para la primera versión (v0.1.0).
 

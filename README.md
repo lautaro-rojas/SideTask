@@ -58,7 +58,7 @@ This is an indie project built with ❤️. If you find SideTask useful, please 
 
 * Leave a ⭐️⭐️⭐️⭐️⭐️ rating on the [Marketplace](https://marketplace.visualstudio.com/items?itemName=LautaroRojas.sidetask).
 * Report bugs or request features on our [GitHub Issues](https://github.com/tu-usuario/sidetask/issues).
-* [Buy me a coffee!](https://buymeacoffee.com/lautarorojaso) 
+* [Buy me a coffee!](https://buymeacoffee.com/lautarorojas) 
 
 ## License
 

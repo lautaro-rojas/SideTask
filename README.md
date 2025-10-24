@@ -1,7 +1,7 @@
 # SideTask - All in one smart TODO Manager
 
 <p align="center">
-  <img src="./images/LogoSideTask-SinFondo.png" alt="SideTask Logo" width="128"/>
+  <img src="./images/SideTask-Logo.png" alt="SideTask Logo" width="128"/>
   <br/>
   <strong>Your entire codebase's TODO list, in one place.</strong>
 </p>

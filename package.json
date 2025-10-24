@@ -2,13 +2,13 @@
   "name": "sidetask",
   "displayName": "SideTask",
   "description": "Una extensión para encontrar y gestionar todos tus TODOs, FIXMEs y tareas de código en un solo lugar.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "LautaroRojas",
   "repository": {
     "type": "git",
     "url": "https://github.com/lautaro-rojas/SideTask.git"
   },
-  "icon": "images/LogoSideTask-MejorRecortado.png",
+  "icon": "images/SideTask-Logo.png",
   "engines": {
     "vscode": "^1.105.0"
   },

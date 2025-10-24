@@ -55,7 +55,7 @@ SideTask recién está comenzando. Nuestro objetivo es convertir esta en la herr
 Este es un proyecto *indie* construido con ❤️. Si encuentras útil SideTask, por favor considera apoyar su desarrollo:
 
 * Deja una reseña de ⭐️⭐️⭐️⭐️⭐️ en el [Marketplace](https://marketplace.visualstudio.com/items?itemName=LautaroRojas.sidetask).
-* Reporta errores o solicita características en nuestros [Issues de GitHub](https://github.com/tu-usuario/sidetask/issues).
+* Reporta errores o solicita características en nuestros [Issues de GitHub](https://github.com/lautaro-rojas/SideTask/issues).
 * [¡Invítame un café!](https://buymeacoffee.com/lautarorojas)
 
 ## Licencia

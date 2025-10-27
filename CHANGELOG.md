@@ -8,11 +8,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- **Keyword Configuration:** Added the `sidetask.keywords` setting (defaulting to `["TODO", "FIXME", "HACK"]`) to allow users to customize search terms.
+- **Notion Integration:** Add the ability to create cards in Notion.
+- **AI Integration:** Add the ability to make queries to the AI within the extension.
 
 ### Changed
 
 ### Removed
+
+## [v0.2.0] - 2025-10-27
+This section documents all changes prepared for version v0.2.0.
+
+### Added
+- **Keyword Configuration:** Added the `sidetask.keywords` setting (defaulting to `["TODO", "FIXME", "HACK"]`) to allow users to customize search terms.
+
+### Fixed
+
+### Changed
 
 ## [v0.1.2] - 2025-10-24
 This section documents all changes prepared for version v0.1.2.

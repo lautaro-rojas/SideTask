@@ -46,11 +46,20 @@ export function activate(context: vscode.ExtensionContext) {
 		todoTreeProvider.refresh();
 	});
 
+	const configChange = vscode.workspace.onDidChangeConfiguration(e => {
+    // Comprobamos si el cambio en la configuración afecta a nuestras 'keywords'
+    if (e.affectsConfiguration('sidetask.keywords')) {
+      // Si es así, refrescamos el proveedor
+      todoTreeProvider.refresh();
+    }
+  });
+
 	// No olvides añadir el nuevo comando a las 'subscriptions'
 	// para que se libere al desactivar la extensión.
 	context.subscriptions.push(openFileCommand);
 	context.subscriptions.push(refreshCommand);
 	context.subscriptions.push(autoRefresh);
+	context.subscriptions.push(configChange);
 }
 
 // This method is called when your extension is deactivated

@@ -7,17 +7,17 @@ y este proyecto se adhiere al [Versionado Semántico](https://semver.org/spec/v2
 
 ## [Unreleased]
 
-### Añadido
-
-- **Ajuste de Palabras Clave:** Se añade la configuración `sidetask.keywords` (con `["TODO", "FIXME", "HACK"]` por defecto) para que el usuario pueda personalizar los términos de búsqueda.
+### Added
+- **Integración con Notion:** Agregar la posibilidad de crear tarjetas en Notion.
+- **Integración con IA:** Agregar la posibilidad de hacer consultas a la IA dentro de la extensión.
 
 ### Changed
 
 
 ### Removed
 
-<!-- 
-## [v0.2.0] - 2025-10-DD
+
+## [v0.2.0] - 2025-10-27
 Esta sección documenta todos los cambios preparados para la primera versión (v0.2.0).
 
 ### Added
@@ -28,7 +28,7 @@ Esta sección documenta todos los cambios preparados para la primera versión (v
 ### Changed
 
 ### Removed
--->
+
 ## [v0.1.2] - 2025-10-24
 Esta sección documenta todos los cambios preparados para la versión v0.1.2.
 

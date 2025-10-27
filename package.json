@@ -56,7 +56,23 @@
         }
       ]
     },
-    "sidetask.keywords": ["TODO","FIXME","BUG"]
+    "configuration": {
+      "title": "SideTask TODO Tracker",
+      "properties": {
+        "sidetask.keywords": {
+          "type": "array",
+          "default": [
+            "TODO",
+            "FIXME",
+            "HACK"
+          ],
+          "description": "Lista de palabras clave (sin los dos puntos) que la extensión debe buscar.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",

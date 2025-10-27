@@ -21,14 +21,16 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 
 ---
 
-## Features (MVP v0.1.0)
+## Features (v0.2.0)
 
 This is the first release of SideTask, focusing on the essential features to get you organized:
 
 * **🌲 Unified Tree View:** See all found tasks in a clean, collapsible tree view, neatly organized by file.
 * **⌨️ Default Keywords:** Automatically scans your project for `TODO:`, `FIXME:`, and `HACK:`.
+* **⌨️ Your oun Keywords:** Automatically scan your project for any word you choose.
 * **🖱️ Click-to-Go:** Instantly jump to the exact line of any task in your code just by clicking on it in the side panel.
 * **🔄 Manual Refresh:** A simple "Refresh" button in the view's title bar to re-scan your workspace at any time.
+* **🔄 Automatic Refresh:** The extension will re-scan your workspace each time you save a file (ctrl+s).
 
 <!--
 ![SideTask Screenshot (Demo)](URL_DEL_GIF_O_IMAGEN_DE_TU_EXTENSION_AQUI)
@@ -43,6 +45,13 @@ This is the first release of SideTask, focusing on the essential features to get
 4.  The panel will automatically populate with all the tasks found in your code.
 5.  Click any task to jump straight to the file!
 
+## How can I add my word?
+1.  Go to File -> Preferences -> Configuration (or snippet ctrl+,).
+2.  Search "SideTask".
+3.  Go to the option SideTask: Keywords.
+4.  Click the button "Add Element".
+5.  Write your favourite word.
+
 ## What's Next? (Roadmap)
 
 SideTask is just getting started. Our goal is to make this the *ultimate* task management tool for developers, right inside the editor. Here is what's planned:
@@ -51,6 +60,7 @@ SideTask is just getting started. Our goal is to make this the *ultimate* task m
 * **🎛️ Advanced Filtering:** Filter tasks by keyword, tag, or file.
 * **⚡ Smart Snippets:** Quickly create new TODO items with keyboard shortcuts.
 * **🚀 [PRO] Integrations:** Connect SideTask to your favorite tools like **Notion**, **Jira**, and **Trello** to turn code comments into real tasks.
+* **🚀 [PRO] AI Integrations:** Connect SideTask to your favorite AI like **Chat GPT**.
 
 ## Support the Project
 

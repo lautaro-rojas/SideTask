@@ -21,14 +21,17 @@ Deja de perder el rastro de tareas pendientes y deuda técnica. Si está en tu c
 
 ---
 
-## Características (MVP v0.1.0)
+## Características (v0.2.0)
 
 Esta es la primera versión de SideTask, enfocada en las características esenciales para organizarte:
 
 * **🌲 Vista de Árbol Unificada:** Mira todas las tareas encontradas en una vista de árbol limpia y colapsable, organizadas por archivo.
 * **⌨️ Palabras Clave por Defecto:** Escanea automáticamente tu proyecto en busca de `TODO:`, `FIXME:` y `HACK:`.
+* **⌨️ Palabras Clave Propias:** Escanea automáticamente tu proyecto en busca de la/s palabras que agregues en la configuración.
 * **🖱️ Clic para Ir:** Salta instantáneamente a la línea exacta de cualquier tarea en tu código con solo un clic en el panel lateral.
 * **🔄 Refresco Manual:** Un simple botón de "Refrescar" en la barra de título de la vista para volver a escanear tu espacio de trabajo en cualquier momento.
+* **🔄 Refresco Automático:** La extensión va a re-escanear el proyecto cada vez que se guarda un archivo (ctrl+,).
+
 <!--- 
 ![Captura de SideTask (Demo)](URL_DEL_GIF_O_IMAGEN_DE_TU_EXTENSION_AQUI)
 *(Te recomiendo 100% que grabes un GIF corto mostrando la extensión en acción y reemplaces esta línea)*
@@ -41,6 +44,14 @@ Esta es la primera versión de SideTask, enfocada en las características esenci
 4.  El panel se poblará automáticamente con todas las tareas encontradas en tu código.
 5.  ¡Haz clic en cualquier tarea para saltar directamente al archivo!
 
+## ¿Cómo puedo agregar mi propia plabra?
+1.  Ir a Archivo -> Preferencias -> Configuración (o atajo ctrl+,).
+2.  Buscar "SideTask".
+3.  Ir a la opción SideTask: Keywords.
+4.  Seleccionar el botón "Agregar elemento".
+5.  Escribir tu palabra.
+![Captura configuarción palabras SideTask](images\SideTask-ConfigKeywords-es.png)
+
 ## ¿Qué Sigue? (Roadmap)
 
 SideTask recién está comenzando. Nuestro objetivo es convertir esta en la herramienta de gestión de tareas *definitiva* para desarrolladores, directamente dentro del editor. Esto es lo que está planeado:
@@ -49,6 +60,7 @@ SideTask recién está comenzando. Nuestro objetivo es convertir esta en la herr
 * **🎛️ Filtros Avanzados:** Filtra tareas por palabra clave, etiqueta o archivo.
 * **⚡ Snippets Inteligentes:** Crea rápidamente nuevos ítems TODO con atajos de teclado.
 * **🚀 [PRO] Integraciones:** Conecta SideTask con tus herramientas favoritas como **Notion**, **Jira** y **Trello** para convertir comentarios de código en tareas reales.
+* **🚀 [PRO] Integraciones con IA:** Conecta SideTask con tu IA favoritas como **Chat GPT**.
 
 ## Apoya el Proyecto
 

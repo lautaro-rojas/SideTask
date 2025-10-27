@@ -1,7 +1,7 @@
 # SideTask - Gestor todo en uno de TODOs Inteligente
 
 <p align="center">
-  <img src="./images/SideTask-Logo.png" alt="Logo de SideTask" width="128"/>
+  <img src="https://raw.githubusercontent.com/lautaro-rojas/SideTask/main/images/SideTask-Logo.png" alt="Logo de SideTask" width="128"/>
   <br/>
   <strong>Toda la lista de TODOs de tu código, en un solo lugar.</strong>
 </p>

@@ -50,7 +50,7 @@ Esta es la primera versión de SideTask, enfocada en las características esenci
 3.  Ir a la opción SideTask: Keywords.
 4.  Seleccionar el botón "Agregar elemento".
 5.  Escribir tu palabra.
-![Captura configuarción palabras SideTask](images\SideTask-ConfigKeywords-es.png)
+![Captura configuarción palabras SideTask](https://raw.githubusercontent.com/lautaro-rojas/SideTask/main/images/SideTask-ConfigKeywords-es.png)
 
 ## ¿Qué Sigue? (Roadmap)
 

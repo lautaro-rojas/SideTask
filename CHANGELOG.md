@@ -15,6 +15,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [v0.2.1] - 2025-10-27
+This section documents all changes prepared for version v0.2.1.
+
+### Added
+
+### Fixed
+- **Images in README:** Images in readme fixed.
+
+### Changed
+
 ## [v0.2.0] - 2025-10-27
 This section documents all changes prepared for version v0.2.0.
 
@@ -69,6 +79,7 @@ This section documents all changes prepared for version v0.1.0.
 ### Removed
 
 [unreleased]: https://github.com/lautaro-rojas/SideTask
+[v0.2.1]: https://github.com/lautaro-rojas/SideTask
 [v0.2.0]: https://github.com/lautaro-rojas/SideTask
 [v0.1.2]: https://github.com/lautaro-rojas/SideTask
 [v0.1.1]: https://github.com/lautaro-rojas/SideTask

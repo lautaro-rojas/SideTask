@@ -25,9 +25,6 @@
         "title": "Hello World"
       },
       {
-        "command": "sidetask.openFile"
-      },
-      {
         "command": "sidetask.refresh",
         "title": "Refrescar TODOs",
         "icon": "$(refresh)"

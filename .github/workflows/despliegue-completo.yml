@@ -1,0 +1,66 @@
+name: Pipeline de Despliegue Completo CI/CD
+
+on:
+  push:
+    branches: [ "main", "preprod", "test", "develop" ]
+
+jobs:
+  test-code:
+    name: 1. Probar Código (Extensión VSCode)
+    runs-on: ubuntu-latest
+
+    steps:
+      # Descarga el código
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      # Configura el entorno de Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x' # Puedes ajustar la versión de Node.js
+
+      # Instala las dependencias de forma limpia
+      - name: Instalar dependencias
+        run: npm ci
+
+      # Compila la extensión (asumiendo que usas TypeScript)
+      # Revisa tu package.json por si el script se llama 'build' en lugar de 'compile'
+      - name: Compilar extensión
+        run: npm run compile
+
+      # Ejecuta las pruebas de la extensión
+      - name: Ejecutar pruebas
+        run: |
+          # Las pruebas de extensión de VSCode necesitan un display server.
+          # Usamos Xvfb (X virtual framebuffer) para simular uno en el runner.
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          xvfb-run -a npm test
+
+  deploy-test:
+    name: 2. Desplegar a TEST
+    needs: test-code
+    if: github.ref == 'refs/heads/test'
+    runs-on: ubuntu-latest
+    environment: TEST
+    steps:
+      - run: echo "Desplegando a TEST..."
+
+  deploy-preprod:
+    name: 3. Desplegar a PREPROD
+    needs: test-code
+    if: github.ref == 'refs/heads/preprod'
+    runs-on: ubuntu-latest
+    environment: PREPROD
+    steps:
+      - run: echo "Desplegando a PREPROD..."
+
+  deploy-prod:
+    name: 4. Desplegar a PROD
+    needs: test-code
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: PROD
+    steps:
+    - run: echo "Desplegando a PROD..."

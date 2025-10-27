@@ -1,6 +1,19 @@
 // src/scanner.ts
 import * as vscode from 'vscode';
 import { TodoItem } from './types';
+import { parseDocument } from './parser';
+
+/**
+ * Lee la configuración de VS Code para obtener las palabras clave.
+ */
+function getKeywordsFromConfig(): string[] {
+    // 1. Obtenemos el objeto de configuración para 'sidetask'
+    const config = vscode.workspace.getConfiguration('sidetask');
+
+    // 2. Leemos la propiedad 'keywords' que definimos en package.json
+    //    y proveemos un array vacío como valor por defecto si falla.
+    return config.get<string[]>('keywords', []);
+}
 
 // Nuestra expresión regular para buscar las palabras clave.
 // \b -> Límite de palabra (para no encontrar 'MYTODO')
@@ -12,10 +25,14 @@ const TODO_REGEX = /\b(TODO|FIXME|HACK):(.*)/i;
 
 export async function scanWorkspace(): Promise<TodoItem[]> {
 
-    console.log('Carpetas del workspace:', vscode.workspace.workspaceFolders);
     const allTodoItems: TodoItem[] = [];
 
-    // 1. Encontrar todos los archivos en el workspace.
+    // 1. Leer las palabras clave desde la configuración
+    const keywords = getKeywordsFromConfig();
+    if (keywords.length === 0) {
+        vscode.window.showInformationMessage('No se han configurado palabras clave para SideTask.');
+        return [];
+    }
     // El primer patrón ('**/*') busca todo.
     // El segundo patrón ('**/node_modules/**') excluye node_modules.
     // Puedes añadir más exclusiones aquí (ej. '**/dist/**')
@@ -33,23 +50,21 @@ export async function scanWorkspace(): Promise<TodoItem[]> {
             continue; // Saltar al siguiente archivo si no se puede abrir
         }
 
-        // 4. Leer el documento línea por línea
-        for (let i = 0; i < document.lineCount; i++) {
-            const line = document.lineAt(i);
+        // 2. Obtener el contenido completo del documento
+        const fileContent = document.getText();
 
-            // 5. Probar nuestra RegExp en la línea
-            const match = line.text.match(TODO_REGEX);
+        // 3. Llamar a nuestro parser "puro"
+        const parsedItems = parseDocument(fileContent, keywords);
 
-            if (match) {
-                // 6. Si hay coincidencia, crear nuestro objeto TodoItem
-                const todo: TodoItem = {
-                    uri: file,
-                    lineNumber: i, // 'i' es el número de línea (base 0)
-                    lineText: line.text.trim(), // Texto limpio
-                    keyword: match[1].toUpperCase() // 'match[1]' es (TODO|FIXME|HACK)
-                };
-                allTodoItems.push(todo);
-            }
+        // 4. Convertir los ParsedItem "puros" en TodoItem "impuros" (con la URI)
+        for (const item of parsedItems) {
+            const todo: TodoItem = {
+                uri: file,
+                lineNumber: item.lineNumber,
+                lineText: item.lineText,
+                keyword: item.keyword
+            };
+            allTodoItems.push(todo);
         }
     }
 

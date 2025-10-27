@@ -58,7 +58,8 @@
           "name": "Project TODOs"
         }
       ]
-    }
+    },
+    "sidetask.keywords": ["TODO","FIXME","BUG"]
   },
   "scripts": {
     "vscode:prepublish": "npm run package",

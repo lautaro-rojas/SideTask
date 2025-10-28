@@ -19,23 +19,19 @@
 
 Stop losing track of pending tasks and technical debt. If it's in your code, it's on your list.
 
----
-
 ## Features (v0.2.0)
 
-This is the first release of SideTask, focusing on the essential features to get you organized:
+### NEW 
+* **⌨️ Your oun Keywords:** Automatically scan your project for any word you choose.
 
+### Already implemented
 * **🌲 Unified Tree View:** See all found tasks in a clean, collapsible tree view, neatly organized by file.
 * **⌨️ Default Keywords:** Automatically scans your project for `TODO:`, `FIXME:`, and `HACK:`.
-* **⌨️ Your oun Keywords:** Automatically scan your project for any word you choose.
 * **🖱️ Click-to-Go:** Instantly jump to the exact line of any task in your code just by clicking on it in the side panel.
 * **🔄 Manual Refresh:** A simple "Refresh" button in the view's title bar to re-scan your workspace at any time.
 * **🔄 Automatic Refresh:** The extension will re-scan your workspace each time you save a file (ctrl+s).
 
-<!--
-![SideTask Screenshot (Demo)](URL_DEL_GIF_O_IMAGEN_DE_TU_EXTENSION_AQUI)
-*(Te recomiendo 100% que grabes un GIF corto mostrando la extensión en acción y reemplaces esta línea)*
--->
+![SideTask Video Demo](resources\videos\SideTask-VideoMVP.mp4)
 
 ## Getting Started
 

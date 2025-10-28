@@ -31,7 +31,7 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 * **🔄 Manual Refresh:** A simple "Refresh" button in the view's title bar to re-scan your workspace at any time.
 * **🔄 Automatic Refresh:** The extension will re-scan your workspace each time you save a file (ctrl+s).
 
-![SideTask Video Demo](resources\videos\SideTask-VideoMVP.mp4)
+![SideTask Video Demo](/resources/videos/SideTask-VideoMVP.mp4)
 
 ## Getting Started
 

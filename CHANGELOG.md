@@ -55,6 +55,7 @@ This section documents all changes prepared for version v0.2.2.
 ### Fixed
 
 ### Changed
+- **Extension dispay name:** Extension name displayed in the marketplace has been changed.
 - **Extension description:** The language of the extension description displayed in the marketplace has been changed.
 - **README:** Update README.md
 - **CHANGELOG:** Update CHANGELOG.md

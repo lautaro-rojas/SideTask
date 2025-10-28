@@ -8,14 +8,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Markdown Support (`.todo`):** Allows you to manage tasks in dedicated `.md` or `.todo` files. It recognizes Markdown task syntax and adds them to the tree view.
+    - Editing Commands: Enter creates a new [ ]. Tab indents the task.
+    - Implements the functionality of [ ] or [x]. Recognizes Markdown task syntax and adds them to the tree view.
+- **Enriched Syntax:** The extension learns to "read" the contents of the TODO. The parser now recognizes special patterns:
+  - **Tags:** `// TODO: Fix this #bug #ui`
+  - **Dates:** `// REFACTOR: Clean this @due:2025-12-01`
+  - **Status:** `// TODO: Implement function @done`  vs `// TODO: Implement function @pending`
+- **Filtering:** Filter tasks by keyword, tag, or file.
+- **Snippets:** Quickly create new TODO items with snippets. Type TODO and press Tab autocomplete // TODO: [ ].
+- **Keyboard shortcuts:** Quickly create new TODO items with keyboard shortcuts.
+- **Highlighting in the Editor:** Highlights the entire comment line within the code editor based on the keyword. The colors are customizable.
+- **Icons:** Display a different icon for each keyword type.
+- **Secure Authentication:** A system for users to securely store their API keys from external services (Notion, Jira). It uses the VS Code API's Secret Storage.
 - **Notion Integration:** Add the ability to create cards in Notion.
-- **AI Integration:** Add the ability to make queries to the AI within the extension.
+    - Syncs TODOs with a Notion database.
+    - One command (right-click on a TODO) -> "Send to Notion".
+    - Configures to map keywords/tags to Notion properties.
+    - Two-way synchronization. If you mark the task as "Done" in Notion, the code comment is updated to `// TODO: [x]`.
+- **Jira Integration:** Add the ability to create cards in Jira.
+- **Trello Integration:** Add the ability to create cards in Trello.
+- **Google Tasks Integration:** Add the ability to create cards in Google Tasks.
+- **Chat GPT Integration:** Add the ability to make queries to the AI within the extension.
 
 ### Changed
 
 ### Removed
 
-## [v0.2.2] - 2025-10-27
+<!--
+## [v0.2.X] - 2025-10-2X
+This section documents all changes prepared for version v0.2.X.
+
+### Added
+
+### Fixed
+
+### Changed
+-->
+
+## [v0.2.2] - 2025-10-28
 This section documents all changes prepared for version v0.2.2.
 
 ### Added
@@ -24,7 +55,9 @@ This section documents all changes prepared for version v0.2.2.
 ### Fixed
 
 ### Changed
-
+- **Extension description:** The language of the extension description displayed in the marketplace has been changed.
+- **README:** Update README.md
+- **CHANGELOG:** Update CHANGELOG.md
 
 ## [v0.2.1] - 2025-10-27
 This section documents all changes prepared for version v0.2.1.
@@ -90,6 +123,7 @@ This section documents all changes prepared for version v0.1.0.
 ### Removed
 
 [unreleased]: https://github.com/lautaro-rojas/SideTask
+[v0.2.3]: https://github.com/lautaro-rojas/SideTask
 [v0.2.2]: https://github.com/lautaro-rojas/SideTask
 [v0.2.1]: https://github.com/lautaro-rojas/SideTask
 [v0.2.0]: https://github.com/lautaro-rojas/SideTask

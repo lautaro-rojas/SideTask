@@ -21,7 +21,7 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 
 ## Features (v0.2.0)
 
-### NEW 
+### NEW 🎆
 * **⌨️ Your oun Keywords:** Automatically scan your project for any word you choose.
 
 ### Already implemented
@@ -34,7 +34,6 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 ![SideTask Video Demo](/resources/videos/SideTask-VideoMVP.mp4)
 
 ## Getting Started
-
 1.  Install the **SideTask** extension from the VS Code Marketplace.
 2.  Open a project.
 3.  Click on the new **SideTask icon** in your Activity Bar (the sidebar on the left).
@@ -42,24 +41,35 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 5.  Click any task to jump straight to the file!
 
 ## How can I add my word?
-1.  Go to File -> Preferences -> Configuration (or snippet ctrl+,).
+1.  Go to File -> Preferences -> Configuration (or keyboard shortcut ctrl+,).
 2.  Search "SideTask".
 3.  Go to the option SideTask: Keywords.
 4.  Click the button "Add Element".
 5.  Write your favourite word.
 
 ## What's Next? (Roadmap)
-
 SideTask is just getting started. Our goal is to make this the *ultimate* task management tool for developers, right inside the editor. Here is what's planned:
 
-* **✨ Custom Highlighting:** Define your own keywords (like `NOTE:`, `BUG:`) and give them custom colors.
+* **✨ Custom Highlighting:** Define your own keywords (like `NOTE`, `BUG`) and give them custom colors.
 * **🎛️ Advanced Filtering:** Filter tasks by keyword, tag, or file.
-* **⚡ Smart Snippets:** Quickly create new TODO items with keyboard shortcuts.
-* **🚀 [PRO] Integrations:** Connect SideTask to your favorite tools like **Notion**, **Jira**, and **Trello** to turn code comments into real tasks.
+* **⚡ Smart Snippets:** Quickly create new TODO items with snippets. Type TODO and press Tab autocomplete // TODO: [ ].
+* **⚡ Keyboard shortcuts:** Quickly create new TODO items with keyboard shortcuts.
+* **💡 Icons:** Display a different icon for each keyword type:
+  * 🎯 TODO
+  * 🐞 BUG
+  * 🔧 FIXME
+  * 💡 IDEA
+  * 🗒️ NOTE
+  * ⚙️ REFACTOR
+* **Enriched Syntax:** The extension learns to "read" the contents of the TODO. The parser recognizes special patterns:
+  - **Tags:** `// TODO: Fix this #bug #ui`.
+  - **Dates:** `// REFACTOR: Clean this @due:2025-12-01`.
+  - **Status:** `// TODO: Implement function @done`  vs `// TODO: Implement function @pending`.
+* **Markdown Support (`.todo`):** Allows you to manage tasks in dedicated `.md` or `.todo` files. It recognizes Markdown task syntax and adds them to the tree view.
+* **🚀 [PRO] Integrations:** Connect SideTask to your favorite tools like **Notion**, **Jira**, and **Trello** to turn code comments into a card.
 * **🚀 [PRO] AI Integrations:** Connect SideTask to your favorite AI like **Chat GPT**.
 
 ## Support the Project
-
 This is an indie project built with ❤️. If you find SideTask useful, please consider supporting its development:
 
 * Leave a ⭐️⭐️⭐️⭐️⭐️ rating on the [Marketplace](https://marketplace.visualstudio.com/items?itemName=LautaroRojas.sidetask).

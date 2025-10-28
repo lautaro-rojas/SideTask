@@ -1,8 +1,8 @@
 {
   "name": "sidetask",
   "displayName": "SideTask",
-  "description": "Una extensión para encontrar y gestionar todos tus TODOs, FIXMEs y tareas de código en un solo lugar.",
-  "version": "0.2.1",
+  "description": "Find and manage all your TODOs, FIXMEs, and coding tasks in one place. All in One TODO extension.",
+  "version": "0.2.2",
   "publisher": "LautaroRojas",
   "repository": {
     "type": "git",

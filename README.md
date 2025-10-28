@@ -44,11 +44,12 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 
 ## How can I add my word?
 1. Go to File -> Preferences -> Settings (or keyboard shortcut ctrl+,).
-  ![SideTask File -> Preferences -> Settings image](./images/SideTask-FilePrefSett-en.png)
+<!-- TODO: Poner rutas absolutas -->
+  ![SideTask File -> Preferences -> Settings image](https://github.com/lautaro-rojas/SideTask/blob/main/images/SideTask-FilePrefSett-en.png?raw=true)
 2. Search "SideTask".
 3. Go to the option SideTask: Keywords.
 4. Click the button "Add Item".
-  ![SideTask config keywords image](./images/SideTask-ConfigKeywords-en.png)
+  ![SideTask config keywords image](https://github.com/lautaro-rojas/SideTask/blob/main/images/SideTask-ConfigKeywords-en.png?raw=true)
 5. Write your favourite word.
 
 ## What's Next? (Roadmap)

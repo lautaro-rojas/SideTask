@@ -24,6 +24,8 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 ### NEW 🎆
 * **⌨️ Your oun Keywords:** Automatically scan your project for any word you choose.
 
+![SideTask Video Demo v0.2.0](./resources/video/SideTask-v020.mp4)
+
 ### Already implemented
 * **🌲 Unified Tree View:** See all found tasks in a clean, collapsible tree view, neatly organized by file.
 * **⌨️ Default Keywords:** Automatically scans your project for `TODO:`, `FIXME:`, and `HACK:`.
@@ -31,21 +33,23 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 * **🔄 Manual Refresh:** A simple "Refresh" button in the view's title bar to re-scan your workspace at any time.
 * **🔄 Automatic Refresh:** The extension will re-scan your workspace each time you save a file (ctrl+s).
 
-![SideTask Video Demo](/resources/videos/SideTask-VideoMVP.mp4)
+![SideTask Video Demo](./resources/videos/SideTask-VideoMVP.mp4)
 
 ## Getting Started
-1.  Install the **SideTask** extension from the VS Code Marketplace.
-2.  Open a project.
-3.  Click on the new **SideTask icon** in your Activity Bar (the sidebar on the left).
-4.  The panel will automatically populate with all the tasks found in your code.
-5.  Click any task to jump straight to the file!
+1. Install the **SideTask** extension from the VS Code Marketplace.
+2. Open a project.
+3. Click on the new **SideTask icon** in your Activity Bar (the sidebar on the left).
+4. The panel will automatically populate with all the tasks found in your code.
+5. Click any task to jump straight to the file!
 
 ## How can I add my word?
-1.  Go to File -> Preferences -> Configuration (or keyboard shortcut ctrl+,).
-2.  Search "SideTask".
-3.  Go to the option SideTask: Keywords.
-4.  Click the button "Add Element".
-5.  Write your favourite word.
+1. Go to File -> Preferences -> Settings (or keyboard shortcut ctrl+,).
+  ![SideTask File -> Preferences -> Settings image](./images/SideTask-FilePrefSett-en.png)
+2. Search "SideTask".
+3. Go to the option SideTask: Keywords.
+4. Click the button "Add Item".
+  ![SideTask config keywords image](./images/SideTask-ConfigKeywords-en.png)
+5. Write your favourite word.
 
 ## What's Next? (Roadmap)
 SideTask is just getting started. Our goal is to make this the *ultimate* task management tool for developers, right inside the editor. Here is what's planned:

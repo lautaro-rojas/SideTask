@@ -45,6 +45,15 @@ This section documents all changes prepared for version v0.2.X.
 
 ### Changed
 -->
+## [v0.2.3] - 2025-10-28
+This section documents all changes prepared for version v0.2.3.
+
+### Added
+
+### Fixed
+
+### Changed
+- **README:** Update README.md with images.
 
 ## [v0.2.2] - 2025-10-28
 This section documents all changes prepared for version v0.2.2.

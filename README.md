@@ -19,12 +19,10 @@
 
 Stop losing track of pending tasks and technical debt. If it's in your code, it's on your list.
 
-## Features (v0.2.0)
+## Features (v0.3.0)
 
 ### NEW 🎆
-* **⌨️ Your oun Keywords:** Automatically scan your project for any word you choose.
-
-![SideTask Video Demo v0.2.0](./resources/video/SideTask-v020.mp4)
+* **✨ Custom Highlighting:** Define your own keywords (like `NOTE`, `BUG`) and give them custom colors.
 
 ### Already implemented
 * **🌲 Unified Tree View:** See all found tasks in a clean, collapsible tree view, neatly organized by file.
@@ -32,8 +30,7 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 * **🖱️ Click-to-Go:** Instantly jump to the exact line of any task in your code just by clicking on it in the side panel.
 * **🔄 Manual Refresh:** A simple "Refresh" button in the view's title bar to re-scan your workspace at any time.
 * **🔄 Automatic Refresh:** The extension will re-scan your workspace each time you save a file (ctrl+s).
-
-![SideTask Video Demo](./resources/videos/SideTask-VideoMVP.mp4)
+* **⌨️ Your oun Keywords:** Automatically scan your project for any word you choose.
 
 ## Getting Started
 1. Install the **SideTask** extension from the VS Code Marketplace.
@@ -44,7 +41,6 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 
 ## How can I add my word?
 1. Go to File -> Preferences -> Settings (or keyboard shortcut ctrl+,).
-<!-- TODO: Poner rutas absolutas -->
   ![SideTask File -> Preferences -> Settings image](https://github.com/lautaro-rojas/SideTask/blob/main/images/SideTask-FilePrefSett-en.png?raw=true)
 2. Search "SideTask".
 3. Go to the option SideTask: Keywords.
@@ -55,8 +51,7 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 ## What's Next? (Roadmap)
 SideTask is just getting started. Our goal is to make this the *ultimate* task management tool for developers, right inside the editor. Here is what's planned:
 
-* **✨ Custom Highlighting:** Define your own keywords (like `NOTE`, `BUG`) and give them custom colors.
-* **🎛️ Advanced Filtering:** Filter tasks by keyword, tag, or file.
+* **🎛️ Advanced Filtering:** Filter tasks by keyword.
 * **⚡ Smart Snippets:** Quickly create new TODO items with snippets. Type TODO and press Tab autocomplete // TODO: [ ].
 * **⚡ Keyboard shortcuts:** Quickly create new TODO items with keyboard shortcuts.
 * **💡 Icons:** Display a different icon for each keyword type:

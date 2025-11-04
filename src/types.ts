@@ -1,9 +1,23 @@
-// src/types.ts
 import * as vscode from 'vscode';
 
+/**
+ * Define la estructura de un objeto de regla de palabra clave
+ * (leído desde la configuración de VS Code).
+ */
+export interface KeywordRule {
+  text: string;
+  color: string;
+  backgroundColor: string;
+}
+
+/**
+ * Define la estructura de un TODO encontrado.
+ * Ahora incluye el estilo que le corresponde.
+ */
 export interface TodoItem {
-  uri: vscode.Uri;      // La URI (ruta) completa del archivo
-  lineNumber: number;   // El número de línea (empezando en 0)
-  lineText: string;     // El texto completo de la línea
-  keyword: string;      // La palabra clave encontrada (TODO, FIXME, etc.)
+  uri: vscode.Uri;
+  lineNumber: number;
+  lineText: string;
+  keyword: string;
+  style: KeywordRule; // <-- AÑADIDO: Almacena el estilo completo
 }

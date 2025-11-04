@@ -1,18 +1,17 @@
 // src/scanner.ts
 import * as vscode from 'vscode';
-import { TodoItem } from './types';
+import { TodoItem, KeywordRule } from './types'
 import { parseDocument } from './parser';
 
 /**
- * Lee la configuración de VS Code para obtener las palabras clave.
+ * Lee la configuración de VS Code para obtener las KeywordRules.
  */
-function getKeywordsFromConfig(): string[] {
-    // 1. Obtenemos el objeto de configuración para 'sidetask'
+export function getKeywordRulesFromConfig(): KeywordRule[] {
     const config = vscode.workspace.getConfiguration('sidetask');
 
-    // 2. Leemos la propiedad 'keywords' que definimos en package.json
-    //    y proveemos un array vacío como valor por defecto si falla.
-    return config.get<string[]>('keywords', []);
+    // Leemos 'keywordRules' (el nuevo nombre que definimos)
+    // y proveemos un array vacío como valor por defecto.
+    return config.get<KeywordRule[]>('keywordRules', []);
 }
 
 // Nuestra expresión regular para buscar las palabras clave.
@@ -27,42 +26,38 @@ export async function scanWorkspace(): Promise<TodoItem[]> {
 
     const allTodoItems: TodoItem[] = [];
 
-    // 1. Leer las palabras clave desde la configuración
-    const keywords = getKeywordsFromConfig();
-    if (keywords.length === 0) {
-        vscode.window.showInformationMessage('No se han configurado palabras clave para SideTask.');
+    // 1. Leer las REGLAS desde la configuración
+    const keywordRules = getKeywordRulesFromConfig();
+    if (keywordRules.length === 0) {
+        // No mostramos un mensaje, simplemente no encontramos nada.
+        // El usuario puede no querer usar la extensión.
         return [];
     }
-    // El primer patrón ('**/*') busca todo.
-    // El segundo patrón ('**/node_modules/**') excluye node_modules.
-    // Puedes añadir más exclusiones aquí (ej. '**/dist/**')
+
     const files = await vscode.workspace.findFiles('**/*', '**/node_modules/**');
 
-    // 2. Procesar cada archivo encontrado
-    console.log('Archivos encontrados por findFiles:', files.length, files);
     for (const file of files) {
         let document;
         try {
-            // 3. Abrir el documento (en memoria, no se muestra en el editor)
             document = await vscode.workspace.openTextDocument(file);
         } catch (error) {
             console.error(`Error opening document ${file.fsPath}`, error);
-            continue; // Saltar al siguiente archivo si no se puede abrir
+            continue;
         }
 
-        // 2. Obtener el contenido completo del documento
         const fileContent = document.getText();
 
-        // 3. Llamar a nuestro parser "puro"
-        const parsedItems = parseDocument(fileContent, keywords);
+        // 2. Llamar a nuestro parser "puro"
+        const parsedItems = parseDocument(fileContent, keywordRules); // <-- Le pasamos las reglas
 
-        // 4. Convertir los ParsedItem "puros" en TodoItem "impuros" (con la URI)
+        // 3. Convertir los ParsedItem "puros" en TodoItem "impuros" (con la URI)
         for (const item of parsedItems) {
             const todo: TodoItem = {
                 uri: file,
                 lineNumber: item.lineNumber,
                 lineText: item.lineText,
-                keyword: item.keyword
+                keyword: item.keyword,
+                style: item.style // <-- AÑADIDO: Traspasamos el estilo
             };
             allTodoItems.push(todo);
         }

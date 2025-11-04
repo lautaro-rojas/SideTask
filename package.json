@@ -59,16 +59,55 @@
     "configuration": {
       "title": "SideTask TODO Tracker",
       "properties": {
-        "sidetask.keywords": {
+        "sidetask.highlight.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Activa o desactiva el resaltado de líneas de TODOs en el editor."
+        },
+        "sidetask.keywordRules": {
           "type": "array",
+          "description": "Lista de palabras clave y estilos para buscar.",
           "default": [
-            "TODO",
-            "FIXME",
-            "HACK"
+            {
+              "text": "TODO",
+              "color": "#FFFFFF",
+              "backgroundColor": "#FF8C00"
+            },
+            {
+              "text": "FIXME",
+              "color": "#FFFFFF",
+              "backgroundColor": "#DC143C"
+            },
+            {
+              "text": "HACK",
+              "color": "#000000",
+              "backgroundColor": "#ADFF2F"
+            }
           ],
-          "description": "Lista de palabras clave (sin los dos puntos) que la extensión debe buscar.",
           "items": {
-            "type": "string"
+            "type": "object",
+            "title": "Keyword Style",
+            "properties": {
+              "text": {
+                "type": "string",
+                "description": "La palabra clave a buscar (ej. 'TODO', 'BUG')."
+              },
+              "color": {
+                "type": "string",
+                "format": "color-hex",
+                "description": "Color del texto (ej. '#FFFFFF')."
+              },
+              "backgroundColor": {
+                "type": "string",
+                "format": "color-hex",
+                "description": "Color de fondo de la línea (ej. '#FF0000')."
+              }
+            },
+            "required": [
+              "text",
+              "color",
+              "backgroundColor"
+            ]
           }
         }
       }

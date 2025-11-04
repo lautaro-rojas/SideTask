@@ -1,76 +1,81 @@
 // src/test/suite/parser.test.ts
+import * as assert from 'assert'; 
+import { parseDocument } from '../../parser';
+import { KeywordRule } from '../../types'; // <-- IMPORTAR KeywordRule
 
-// 'assert' es el módulo de aserción de Node.js,
-// 'mocha' está disponible globalmente en el entorno de prueba.
-import * as assert from 'assert';
+// --- Funciones Helper para crear reglas de prueba ---
+const mockRule = (text: string): KeywordRule => ({
+  text: text,
+  color: '#000',
+  backgroundColor: '#FFF'
+});
 
-// Importamos la función "pura" que queremos probar
-import { parseDocument, ParsedItem } from '../../parser';
+const todoRule = mockRule('TODO');
+const fixmeRule = mockRule('FIXME');
+const bugRule = mockRule('BUG');
+// ---
 
-// 'suite' es un sinónimo de 'describe' en mocha
-suite('Parser Unit Tests', () => {
+suite('Parser Unit Tests (con KeywordRule)', () => {
 
-    // Un test simple
-    test('Debe encontrar un TODO simple', () => {
-        const content = `
+  test('Debe encontrar un TODO simple', () => {
+    const content = `
       // Esta es una línea de código
       // TODO: Arreglar esto
       // Otra línea
     `;
-        const keywords = ['TODO'];
-        const results = parseDocument(content, keywords);
+    const rules = [todoRule]; // <-- Usar regla de objeto
+    const results = parseDocument(content, rules);
 
-        // Afirmaciones (Assertions)
-        assert.strictEqual(results.length, 1, 'Debería encontrar un solo item');
-        assert.strictEqual(results[0].lineNumber, 2, 'Debería estar en la línea correcta (índice 2)');
-        assert.strictEqual(results[0].keyword, 'TODO', 'La palabra clave debe ser TODO');
-    });
+    assert.strictEqual(results.length, 1, 'Debería encontrar un solo item');
+    assert.strictEqual(results[0].lineNumber, 2, 'Debería estar en la línea correcta (índice 2)');
+    assert.strictEqual(results[0].keyword, 'TODO', 'La palabra clave debe ser TODO');
+    assert.deepStrictEqual(results[0].style, todoRule, 'Debe adjuntar el objeto de estilo correcto'); // <-- Nuevo test
+  });
 
-    test('Debe ser case-insensitive (ignorar mayúsculas/minúsculas)', () => {
-        const content = `// todo: minúscula`;
-        const keywords = ['TODO'];
-        const results = parseDocument(content, keywords);
+  test('Debe ser case-insensitive (ignorar mayúsculas/minúsculas)', () => {
+    const content = `// todo: minúscula`;
+    const rules = [todoRule];
+    const results = parseDocument(content, rules);
+    
+    assert.strictEqual(results.length, 1);
+    assert.strictEqual(results[0].keyword, 'TODO');
+  });
 
-        assert.strictEqual(results.length, 1);
-        assert.strictEqual(results[0].keyword, 'TODO');
-    });
-
-    test('Debe encontrar múltiples palabras clave', () => {
-        const content = `
+  test('Debe encontrar múltiples palabras clave', () => {
+    const content = `
       // todo: uno
       // FIXME: dos
     `;
-        const keywords = ['TODO', 'FIXME'];
-        const results = parseDocument(content, keywords);
+    const rules = [todoRule, fixmeRule]; // <-- Usar reglas de objeto
+    const results = parseDocument(content, rules);
+    
+    assert.strictEqual(results.length, 2);
+    assert.strictEqual(results[0].keyword, 'TODO');
+    assert.strictEqual(results[1].keyword, 'FIXME');
+  });
 
-        assert.strictEqual(results.length, 2);
-        assert.strictEqual(results[0].keyword, 'TODO');
-        assert.strictEqual(results[1].keyword, 'FIXME');
-    });
+  test('Debe ignorar palabras clave que no están en la lista', () => {
+    const content = `// BUG: Esto es un bug`;
+    const rules = [todoRule, fixmeRule]; // <-- 'BUG' no está en la lista
+    const results = parseDocument(content, rules);
+    
+    assert.strictEqual(results.length, 0, 'No debería encontrar nada');
+  });
 
-    test('Debe ignorar palabras clave que no están en la lista', () => {
-        const content = `// BUG: Esto es un bug`;
-        const keywords = ['TODO', 'FIXME'];
-        const results = parseDocument(content, keywords);
+  test('Debe encontrar palabras clave personalizadas', () => {
+    const content = `// BUG: Esto es un bug`;
+    const rules = [todoRule, fixmeRule, bugRule]; // <-- 'BUG' SÍ está en la lista
+    const results = parseDocument(content, rules);
+    
+    assert.strictEqual(results.length, 1);
+    assert.strictEqual(results[0].keyword, 'BUG');
+  });
 
-        assert.strictEqual(results.length, 0, 'No debería encontrar nada');
-    });
-
-    test('Debe encontrar palabras clave personalizadas', () => {
-        const content = `// BUG: Esto es un bug`;
-        // Esta vez, 'BUG' SÍ está en la lista
-        const keywords = ['TODO', 'FIXME', 'BUG'];
-        const results = parseDocument(content, keywords);
-
-        assert.strictEqual(results.length, 1);
-        assert.strictEqual(results[0].keyword, 'BUG');
-    });
-
-    test('No debe encontrar coincidencias sin los dos puntos (:) obligatorios', () => {
-        const content = `// TODO sin los dos puntos`;
-        const keywords = ['TODO'];
-        const results = parseDocument(content, keywords);
-
-        assert.strictEqual(results.length, 0);
-    });
+  test('No debe encontrar coincidencias sin los dos puntos (:) obligatorios', () => {
+    const content = `// TODO sin los dos puntos`;
+    const rules = [todoRule];
+    const results = parseDocument(content, rules);
+    
+    assert.strictEqual(results.length, 0);
+  });
 });

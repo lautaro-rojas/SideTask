@@ -1,40 +1,59 @@
-// src/parser.ts
+import { KeywordRule } from './types';
 
+/**
+ * La estructura "pura" que devuelve el parser.
+ * Ahora también incluye el estilo.
+ */
 export interface ParsedItem {
   lineNumber: number;
   lineText: string;
   keyword: string;
+  style: KeywordRule; // <-- AÑADIDO
 }
 
-export function parseDocument(fileContent: string, keywords: string[]): ParsedItem[] {
+export function parseDocument(fileContent: string, keywordRules: KeywordRule[]): ParsedItem[] {
   const allParsedItems: ParsedItem[] = [];
 
-  if (keywords.length === 0) {
+  if (keywordRules.length === 0) {
     return allParsedItems;
   }
 
-  // 1. Construir la RegExp (SIN el flag 'g', solo 'i' para case-insensitive)
-  const keywordsPattern = keywords.join('|');
-  const todoRegex = new RegExp(`\\b(${keywordsPattern}):(.*)`, 'i'); // <-- CAMBIO AQUÍ
+  // 1. Crear un mapa para buscar estilos por palabra clave (en mayúscula)
+  const styleMap = new Map<string, KeywordRule>();
+  for (const rule of keywordRules) {
+    // Asegurarse de que el texto existe antes de ponerlo en mayúsculas
+    if (rule.text) {
+      styleMap.set(rule.text.toUpperCase(), rule);
+    }
+  }
+
+  // Si el mapa está vacío (ej. reglas mal configuradas), salir
+  if (styleMap.size === 0) {
+    return allParsedItems;
+  }
+
+  // 2. Construir la RegExp dinámicamente desde las claves del mapa
+  const keywordsPattern = Array.from(styleMap.keys()).join('|');
+  const todoRegex = new RegExp(`\\b(${keywordsPattern}):(.*)`, 'i'); // 'i' = case-insensitive
 
   const lines = fileContent.split('\n');
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
-    
-    // 2. Usar 'line.match()' que es más simple y no guarda estado
-    const match = line.match(todoRegex); // <-- CAMBIO AQUÍ
+    const match = line.match(todoRegex);
 
-    // 3. Si hay coincidencia, procesarla
-    if (match) { // <-- CAMBIO AQUÍ
+    if (match) {
+      const keyword = match[1].toUpperCase();
+      const style = styleMap.get(keyword)!; // Sabemos que existe
+
       const item: ParsedItem = {
         lineNumber: i,
         lineText: line.trim(),
-        keyword: match[1].toUpperCase()
+        keyword: keyword,
+        style: style // <-- AÑADIDO: Guardamos el estilo encontrado
       };
       allParsedItems.push(item);
     }
-    // (Se elimina el bucle 'while' que era la fuente del bug)
   }
 
   return allParsedItems;

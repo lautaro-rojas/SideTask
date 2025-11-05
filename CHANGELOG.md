@@ -18,7 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Snippets:** Quickly create new TODO items with snippets. Type TODO and press Tab autocomplete // TODO: [ ].
 - **Keyboard shortcuts:** Quickly create new TODO items with keyboard shortcuts.
-- **Icons:** Display a different icon for each keyword type.
 - **Secure Authentication:** A system for users to securely store their API keys from external services (Notion, Jira). It uses the VS Code API's Secret Storage.
 - **Notion Integration:** Add the ability to create cards in Notion.
     - Syncs TODOs with a Notion database.
@@ -31,7 +30,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Chat GPT Integration:** Add the ability to make queries to the AI within the extension.
 - **Bug 1 - Settings UI:** The settings UI doesn't display the correct wording and colors. It shows "Edit in settings.json"
 - **Right-Click Menu 2:** Context Actions: "Edit line".
+<!-- Prompt para - **Right-Click Menu 2:** Context Actions: "Edit line".
+¡Hola! Quiero continuar con nuestra extensión de VS Code para TODOs.
 
+Ya terminamos la Fase 6 (el menú de clic derecho con "Ir a", "Copiar" y "Eliminar").
+
+Quiero que implementemos la siguiente característica que dejamos pendiente: **"Editar TODO"**.
+
+El plan era:
+1.  Añadir un nuevo comando `sidetask.editTodo` al `package.json` (en la lista de `commands` y en el menú `view/item/context`).
+2.  Implementar el comando en `extension.ts`:
+    * Debe tomar el `TreeItem` (el TODO) como argumento.
+    * Usar `vscode.window.showInputBox` para mostrar una caja de texto, usando el `todo.lineText` actual como valor por defecto (`value`).
+    * Si el usuario ingresa un texto nuevo, usar un `WorkspaceEdit` para *reemplazar* la línea (`todo.lineNumber`) en el archivo (`todo.uri`) con el nuevo texto.
+    * Guardar el archivo (`doc.save()`) para que la vista de árbol y el highlighting se refresquen automáticamente.
+
+Por favor, guíame con los pasos para añadir esto (actualizar `package.json` e implementar el comando en `extension.ts`).
+-->
 ### Changed
 
 ### Removed
@@ -48,16 +63,18 @@ This section documents all changes prepared for version v0.2.X.
 -->
 
 
-## [v0.3.0] - 2025-10-2X
+## [v0.3.0] - 2025-11-05
 This section documents all changes prepared for version v0.2.4.
 
 ### Added
 - **Highlighting in the Editor:** Highlights the entire comment line within the code editor based on the keyword. The colors are customizable. Background and font color.
 - **Filtering:** Filter tasks by keyword.
 - **Right-Click Menu 1:** Context Actions like "Go to file", "Delete line", "Copy line".
+- **Icons:** Display a different icon for each keyword type.
 
 ### Fixed
 - **Bug 2 - Color in deleted line:** When I delete the line from //TODO: ... which has a color, the line below rises and takes the color of the deleted line.
+- **Bug 3 - Color in new line:** When I'm on a line that has formatting such as font color and background, when I press the enter key on the keyboard, the next line maintains the comment formatting.
 
 ### Changed
 

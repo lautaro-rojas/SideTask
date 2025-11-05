@@ -8,6 +8,7 @@ export interface KeywordRule {
   text: string;
   color: string;
   backgroundColor: string;
+  emoji?: string;
 }
 
 /**

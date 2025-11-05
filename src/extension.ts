@@ -73,7 +73,7 @@ export function activate(context: vscode.ExtensionContext) {
 		let refreshTreeView = false;
 		let updateStyles = false;
 
-		if (e.affectsConfiguration('sidetask.keywordRules') || e.affectsConfiguration('sidetask.tree.groupBy')) {
+		if (e.affectsConfiguration('sidetask.keywordRules') || e.affectsConfiguration('sidetask.tree.groupBy') || e.affectsConfiguration('sidetask.tree.showEmojis')) {
 			// Si cambian las reglas O el modo de agrupación,
 			// hay que refrescar el árbol
 			refreshTreeView = true;

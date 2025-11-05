@@ -21,6 +21,12 @@ export class TodoTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem
   private todoDataByFile: Map<string, TodoItem[]> = new Map();
   private todoDataByKeyword: Map<string, TodoItem[]> = new Map();
 
+  // --- Helper para leer el interruptor de Emojis ---
+  private shouldShowEmojis(): boolean {
+    return vscode.workspace.getConfiguration('sidetask')
+      .get<boolean>('tree.showEmojis', true); // Default a 'true'
+  }
+
   /**
    * Helper para leer la configuración de agrupación actual.
    */
@@ -108,15 +114,19 @@ export class TodoTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem
    */
   private getRootFileItems(): vscode.TreeItem[] {
     const fileItems: vscode.TreeItem[] = [];
+    const showEmojis = this.shouldShowEmojis();
+
     for (const filePath of this.todoDataByFile.keys()) {
       const fileUri = vscode.Uri.file(filePath);
       const relativePath = vscode.workspace.asRelativePath(fileUri);
+      const label = showEmojis ? `📁 ${relativePath}` : relativePath;
 
       const treeItem = new vscode.TreeItem(
-        relativePath,
+        label,
         vscode.TreeItemCollapsibleState.Collapsed
       );
 
+      treeItem.iconPath = new vscode.ThemeIcon('file');
       treeItem.resourceUri = fileUri; // Importante para encontrar a los hijos
       treeItem.contextValue = 'file';  // ¡NUEVO! Identificador de tipo
 
@@ -131,16 +141,24 @@ export class TodoTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem
    */
   private getRootKeywordItems(): vscode.TreeItem[] {
     const keywordItems: vscode.TreeItem[] = [];
+    const showEmojis = this.shouldShowEmojis();
 
     // Intentamos ordenar las palabras clave según la configuración
     const keywordRules = getKeywordRulesFromConfig();
-    const orderedKeywords = keywordRules.map(rule => rule.text.toUpperCase());
 
-    for (const keyword of orderedKeywords) {
+    // --- ¡ESTE ES EL BUCLE CORREGIDO! ---
+    // Iteramos sobre 'keywordRules' (los objetos) para poder acceder a 'rule.emoji'
+    for (const rule of keywordRules) {
+      const keyword = rule.text.toUpperCase();
+
       // Solo mostrar la palabra clave si encontramos TODOs para ella
       if (this.todoDataByKeyword.has(keyword)) {
+
+        // Ahora 'rule' SÍ existe y podemos usar 'rule.emoji'
+        const label = showEmojis && rule.emoji ? `${rule.emoji} ${keyword}` : keyword;
+
         const treeItem = new vscode.TreeItem(
-          keyword, // "TODO", "FIXME", etc.
+          label, // <-- Usamos el label que acabamos de crear
           vscode.TreeItemCollapsibleState.Collapsed
         );
         treeItem.contextValue = 'keyword'; // ¡NUEVO! Identificador de tipo
@@ -156,13 +174,18 @@ export class TodoTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem
    */
   private getTodoItemsForFile(fileElement: vscode.TreeItem): vscode.TreeItem[] {
     const filePath = fileElement.resourceUri?.fsPath;
+    const showEmojis = this.shouldShowEmojis();
 
     if (filePath && this.todoDataByFile.has(filePath)) {
       const todosInFile = this.todoDataByFile.get(filePath)!;
 
       return todosInFile.map(todo => {
+        const label = showEmojis && todo.style.emoji
+          ? `${todo.style.emoji} ${todo.lineText}`
+          : todo.lineText;
+
         const treeItem = new vscode.TreeItem(
-          todo.lineText,
+          label,
           vscode.TreeItemCollapsibleState.None
         );
 
@@ -185,7 +208,9 @@ export class TodoTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem
    * (Esta es la nueva lógica)
    */
   private getTodoItemsForKeyword(keywordElement: vscode.TreeItem): vscode.TreeItem[] {
-    const keyword = keywordElement.label as string; // El label es "TODO", "FIXME"
+    const labelText = keywordElement.label as string;
+    const keyword = labelText.split(' ').pop()!;
+    const showEmojis = this.shouldShowEmojis();
 
     if (keyword && this.todoDataByKeyword.has(keyword)) {
       const todosForKeyword = this.todoDataByKeyword.get(keyword)!;
@@ -194,7 +219,10 @@ export class TodoTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem
         const relativePath = vscode.workspace.asRelativePath(todo.uri);
 
         // Formato de etiqueta: "src/cart.cs: // TODO: Considerar..."
-        const label = `${relativePath}: ${todo.lineText}`;
+        const baseLabel = `${relativePath}: ${todo.lineText}`;
+        const label = showEmojis && todo.style.emoji
+          ? `${todo.style.emoji} ${baseLabel}`
+          : baseLabel;
 
         const treeItem = new vscode.TreeItem(
           label,

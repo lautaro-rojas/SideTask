@@ -101,6 +101,11 @@
           ],
           "description": "Choose how to group the items in the tree view."
         },
+        "sidetask.tree.showEmojis": {
+          "type": "boolean",
+          "default": true,
+          "description": "Display an emoji next to each item in the tree view."
+        },
         "sidetask.highlight.enabled": {
           "type": "boolean",
           "default": true,
@@ -108,22 +113,43 @@
         },
         "sidetask.keywordRules": {
           "type": "array",
-          "description": "List of keywords and styles to search.",
+          "description": "List of keywords, styles, and emojis to search.",
           "default": [
             {
               "text": "TODO",
-              "color": "#FFFFFF",
-              "backgroundColor": "#FF8C00"
+              "color": "#00ff15",
+              "backgroundColor": "#00000000",
+              "emoji": "🎯"
+            },
+            {
+              "text": "BUG",
+              "color": "#ff0033",
+              "backgroundColor": "#00000000",
+              "emoji": "🐞"
+            },
+            {
+              "text": "IDEA",
+              "color": "#ADFF2F",
+              "backgroundColor": "#00000000",
+              "emoji": "💡"
+            },
+            {
+              "text": "NOTE",
+              "color": "#ffffff",
+              "backgroundColor": "#00000000",
+              "emoji": "🗒️"
             },
             {
               "text": "FIXME",
-              "color": "#FFFFFF",
-              "backgroundColor": "#DC143C"
+              "color": "#00ffaa",
+              "backgroundColor": "#00000000",
+              "emoji": "🔧"
             },
             {
-              "text": "HACK",
-              "color": "#000000",
-              "backgroundColor": "#ADFF2F"
+              "text": "REFACTOR",
+              "color": "#ff00d4",
+              "backgroundColor": "#00000000",
+              "emoji": "⚙️"
             }
           ],
           "items": {
@@ -143,6 +169,10 @@
                 "type": "string",
                 "format": "color-hex",
                 "description": "Line background color ('#FF0000')."
+              },
+              "emoji": {
+                "type": "string",
+                "description": "The emoji to display in the view (🎯). You can use Win + ."
               }
             },
             "required": [

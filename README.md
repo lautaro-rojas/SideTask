@@ -24,11 +24,20 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 ### NEW 🎆
 * **✨ Custom Highlighting:** Define your own keywords (like `NOTE`, `BUG`) and give them custom colors.
 * **🎛️ Advanced Filtering:** Filter tasks by keyword.
-* **Right-Click Menu:** Context Actions: "Go to file", "Delete line", "Copy line".
+* **🖱️ Right-Click Menu:** Context Actions: "Go to file", "Delete line", "Copy line".
+* **💡 Icons:** Display a different icon for each keyword type:
+  * 🎯 TODO
+  * 🐞 BUG
+  * 💡 IDEA
+  * 🗒️ NOTE
+  * 🔧 FIXME
+  * ⚙️ REFACTOR
+  
+  You can select which icon to display for each keyword.
 
 ### Already implemented
 * **🌲 Unified Tree View:** See all found tasks in a clean, collapsible tree view, neatly organized by file.
-* **⌨️ Default Keywords:** Automatically scans your project for `TODO:`, `FIXME:`, and `HACK:`.
+* **⌨️ Default Keywords:** Automatically scans your project for `TODO:`, `BUG:`, `IDEA:`, `NOTE:`, `FIXME:`, and `REFACTOR:`.
 * **🖱️ Click-to-Go:** Instantly jump to the exact line of any task in your code just by clicking on it in the side panel.
 * **🔄 Manual Refresh:** A simple "Refresh" button in the view's title bar to re-scan your workspace at any time.
 * **🔄 Automatic Refresh:** The extension will re-scan your workspace each time you save a file (ctrl+s).
@@ -55,13 +64,6 @@ SideTask is just getting started. Our goal is to make this the *ultimate* task m
 
 * **⚡ Smart Snippets:** Quickly create new TODO items with snippets. Type TODO and press Tab autocomplete // TODO: [ ].
 * **⚡ Keyboard shortcuts:** Quickly create new TODO items with keyboard shortcuts.
-* **💡 Icons:** Display a different icon for each keyword type:
-  * 🎯 TODO
-  * 🐞 BUG
-  * 🔧 FIXME
-  * 💡 IDEA
-  * 🗒️ NOTE
-  * ⚙️ REFACTOR
 * **Enriched Syntax:** The extension learns to "read" the contents of the TODO. The parser recognizes special patterns:
   - **Tags:** `// TODO: Fix this #bug #ui`.
   - **Dates:** `// REFACTOR: Clean this @due:2025-12-01`.

@@ -59,6 +59,19 @@
     "configuration": {
       "title": "SideTask TODO Tracker",
       "properties": {
+        "sidetask.tree.groupBy": {
+          "type": "string",
+          "default": "file",
+          "enum": [
+            "file",
+            "keyword"
+          ],
+          "enumDescriptions": [
+            "Agrupar TODOs por archivo",
+            "Agrupar TODOs por palabra clave (TODO, FIXME, etc.)"
+          ],
+          "description": "Elige cómo agrupar los ítems en la vista de árbol."
+        },
         "sidetask.highlight.enabled": {
           "type": "boolean",
           "default": true,

@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Tags:** `// TODO: Fix this #bug #ui`
   - **Dates:** `// REFACTOR: Clean this @due:2025-12-01`
   - **Status:** `// TODO: Implement function @done`  vs `// TODO: Implement function @pending`
-- **Filtering:** Filter tasks by keyword.
+
 - **Snippets:** Quickly create new TODO items with snippets. Type TODO and press Tab autocomplete // TODO: [ ].
 - **Keyboard shortcuts:** Quickly create new TODO items with keyboard shortcuts.
 - **Icons:** Display a different icon for each keyword type.
@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Google Tasks Integration:** Add the ability to create cards in Google Tasks.
 - **Chat GPT Integration:** Add the ability to make queries to the AI within the extension.
 - **Bug 1 - Settings UI:** The settings UI doesn't display the correct wording and colors. It shows "Edit in settings.json"
+- **Right-Click Menu:** Context Actions like "Go to file", "Delete line", "Copy"...
 
 ### Changed
 
@@ -52,6 +53,7 @@ This section documents all changes prepared for version v0.2.4.
 
 ### Added
 - **Highlighting in the Editor:** Highlights the entire comment line within the code editor based on the keyword. The colors are customizable. Background and font color.
+- **Filtering:** Filter tasks by keyword.
 
 ### Fixed
 

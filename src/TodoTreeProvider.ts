@@ -1,121 +1,216 @@
-// src/TodoTreeProvider.ts
 import * as vscode from 'vscode';
-import { scanWorkspace } from './scanner';
+// Importamos la función que lee la config (¡la necesitaremos!)
+import { scanWorkspace, getKeywordRulesFromConfig } from './scanner';
 import { TodoItem } from './types';
 
 export class TodoTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
 
-  // --- PASO 5: AÑADIR EL EVENT EMITTER ---
-  // 1. Un emisor de eventos privado que SOLO nuestra clase puede disparar
+  // --- El sistema de refresco (sin cambios) ---
   private _onDidChangeTreeData: vscode.EventEmitter<vscode.TreeItem | undefined | null | void> = new vscode.EventEmitter<vscode.TreeItem | undefined | null | void>();
-
-  // 2. Un evento público que VS Code "escuchará".
-  //    (Esta es la implementación requerida por la interfaz TreeDataProvider)
   readonly onDidChangeTreeData: vscode.Event<vscode.TreeItem | undefined | null | void> = this._onDidChangeTreeData.event;
-  // --- FIN PASO 5 ---
 
-  // Un mapa para almacenar nuestros TODOs agrupados por archivo
-  // Clave: string (ruta del archivo, ej: '/path/to/file.ts')
-  // Valor: TodoItem[] (lista de TODOs en ese archivo)
-  private todoData: Map<string, TodoItem[]> = new Map();
-  // --- PASO 5: AÑADIR UN MÉTODO DE ACTUALIZACIÓN ---
-  // 3. Un método público que disparará el evento.
-  //    Lo llamaremos desde nuestro comando en extension.ts
   public refresh(): void {
-    // 4. Al disparar 'undefined', le decimos a VS Code que
-    //    actualice el árbol desde la raíz.
+    // Al refrescar, limpiamos los datos y disparamos el evento
+    this.todoDataByFile.clear();
+    this.todoDataByKeyword.clear();
     this._onDidChangeTreeData.fire();
   }
-  // --- FIN PASO 5 ---
+  // --- Fin del sistema de refresco ---
 
+  // --- Almacenes de datos para AMBOS modos de agrupación ---
+  private todoDataByFile: Map<string, TodoItem[]> = new Map();
+  private todoDataByKeyword: Map<string, TodoItem[]> = new Map();
 
-  // 'getChildren' es llamado para obtener los hijos de un elemento,
-  // o los elementos raíz si 'element' es undefined.
-  async getChildren(element?: vscode.TreeItem): Promise<vscode.TreeItem[]> {
+  /**
+   * Helper para leer la configuración de agrupación actual.
+   */
+  private getGroupBySetting(): 'file' | 'keyword' {
+    return vscode.workspace.getConfiguration('sidetask')
+      .get<'file' | 'keyword'>('tree.groupBy', 'file'); // Default a 'file'
+  }
 
-    if (element) {
-      // --- Nivel 2: Mostrar TODOs de un archivo ---
+  /**
+   * Helper que escanea el workspace y llena AMBOS mapas de agrupación.
+   */
+  private async scanAndGroupTodos(): Promise<void> {
+    // Limpiar datos antiguos
+    this.todoDataByFile.clear();
+    this.todoDataByKeyword.clear();
 
-      // Si 'element' existe, es un ítem de Archivo.
-      // Obtenemos la ruta del archivo que guardamos en 'resourceUri'.
-      const filePath = element.resourceUri?.fsPath;
+    const allTodos = await scanWorkspace();
 
-      if (filePath && this.todoData.has(filePath)) {
-        const todosInFile = this.todoData.get(filePath)!;
-
-        // Convertimos cada TodoItem en un TreeItem
-        return todosInFile.map(todo => {
-          const treeItem = new vscode.TreeItem(
-            todo.lineText, // La etiqueta es el texto de la línea
-            vscode.TreeItemCollapsibleState.None // No tiene hijos
-          );
-
-          // --- Preparación para el Paso 4 ---
-          // Añadimos datos útiles para el tooltip y para el comando
-          treeItem.description = `Línea ${todo.lineNumber + 1}`; // (Las líneas en VS Code son base 1, la nuestra es base 0)
-          treeItem.tooltip = `Línea ${todo.lineNumber + 1}: ${todo.lineText}`;
-
-          // Este es el comando que se ejecutará al hacer clic.
-          // Lo registraremos en el Paso 4.
-          treeItem.command = {
-            command: 'sidetask.openFile', // Nombre del comando
-            title: 'Abrir Archivo',
-            arguments: [todo] // ¡Le pasamos el objeto TodoItem completo!
-          };
-
-          return treeItem;
-        });
+    // Llenar ambos mapas
+    for (const todo of allTodos) {
+      // 1. Agrupar por Archivo
+      const filePath = todo.uri.fsPath;
+      if (!this.todoDataByFile.has(filePath)) {
+        this.todoDataByFile.set(filePath, []);
       }
-      return []; // No hay hijos
+      this.todoDataByFile.get(filePath)!.push(todo);
 
-    } else {
-      // --- Nivel 1: Mostrar Archivos ---
-
-      // Si 'element' es undefined, estamos en la raíz.
-      // 1. Limpiamos los datos antiguos
-      this.todoData.clear();
-
-      // 2. Ejecutamos el scanner (que creamos en el Paso 2)
-      const allTodos = await scanWorkspace();
-
-      // 3. Agrupamos los TODOs por archivo
-      for (const todo of allTodos) {
-        const filePath = todo.uri.fsPath;
-        if (!this.todoData.has(filePath)) {
-          this.todoData.set(filePath, []);
-        }
-        this.todoData.get(filePath)!.push(todo);
+      // 2. Agrupar por Palabra Clave
+      const keyword = todo.keyword.toUpperCase();
+      if (!this.todoDataByKeyword.has(keyword)) {
+        this.todoDataByKeyword.set(keyword, []);
       }
-
-      // 4. Creamos un TreeItem por cada archivo
-      const fileItems: vscode.TreeItem[] = [];
-      for (const filePath of this.todoData.keys()) {
-        const fileUri = vscode.Uri.file(filePath);
-
-        // Obtenemos la ruta relativa para una vista más limpia
-        // ej: 'src/extension.ts' en lugar de 'C:\Users\Wally\...'
-        const relativePath = vscode.workspace.asRelativePath(fileUri);
-
-        const treeItem = new vscode.TreeItem(
-          relativePath, // La etiqueta es la ruta relativa
-          vscode.TreeItemCollapsibleState.Collapsed // Es colapsable (tiene hijos)
-        );
-
-        // ¡Crucial! Guardamos la URI completa aquí.
-        // Así, cuando el usuario expanda este ítem, el bloque 'if (element)'
-        // de arriba sabrá qué archivo buscar en 'this.todoData'.
-        treeItem.resourceUri = fileUri;
-
-        fileItems.push(treeItem);
-      }
-      return fileItems;
+      this.todoDataByKeyword.get(keyword)!.push(todo);
     }
   }
 
-  // 'getTreeItem' es llamado para obtener la representación visual de un elemento (su etiqueta, ícono, etc.).
+
+  /**
+   * El método principal que VS Code llama para obtener los ítems.
+   * Ahora es un "enrutador" que delega a otras funciones.
+   */
+  async getChildren(element?: vscode.TreeItem): Promise<vscode.TreeItem[]> {
+
+    // Si no hay 'element', estamos pidiendo la raíz.
+    if (!element) {
+      // Escaneamos y agrupamos (solo si los mapas están vacíos)
+      if (this.todoDataByFile.size === 0 && this.todoDataByKeyword.size === 0) {
+        await this.scanAndGroupTodos();
+      }
+
+      // Leemos la configuración para decidir qué mostrar
+      const groupBy = this.getGroupBySetting();
+      if (groupBy === 'file') {
+        return this.getRootFileItems();
+      } else { // groupBy === 'keyword'
+        return this.getRootKeywordItems();
+      }
+    }
+
+    // Si SÍ hay 'element', estamos pidiendo hijos.
+    // Usamos 'contextValue' para saber qué tipo de hijo es.
+    if (element.contextValue === 'file') {
+      return this.getTodoItemsForFile(element);
+    }
+
+    if (element.contextValue === 'keyword') {
+      return this.getTodoItemsForKeyword(element);
+    }
+
+    return []; // No debería llegar aquí
+  }
+
+  /**
+   * Requerido por la interfaz (sin cambios).
+   */
   getTreeItem(element: vscode.TreeItem): vscode.TreeItem {
-    // Como ya construimos nuestros TreeItems completamente en 'getChildren',
-    // aquí simplemente devolvemos el elemento tal cual.
     return element;
+  }
+
+  // --- FUNCIONES HELPER PRIVADAS ---
+
+  /**
+   * Devuelve los ítems raíz para el modo "Agrupar por Archivo".
+   * (Esta es tu lógica antigua)
+   */
+  private getRootFileItems(): vscode.TreeItem[] {
+    const fileItems: vscode.TreeItem[] = [];
+    for (const filePath of this.todoDataByFile.keys()) {
+      const fileUri = vscode.Uri.file(filePath);
+      const relativePath = vscode.workspace.asRelativePath(fileUri);
+
+      const treeItem = new vscode.TreeItem(
+        relativePath,
+        vscode.TreeItemCollapsibleState.Collapsed
+      );
+
+      treeItem.resourceUri = fileUri; // Importante para encontrar a los hijos
+      treeItem.contextValue = 'file';  // ¡NUEVO! Identificador de tipo
+
+      fileItems.push(treeItem);
+    }
+    return fileItems;
+  }
+
+  /**
+   * Devuelve los ítems raíz para el modo "Agrupar por Palabra Clave".
+   * (Esta es la nueva lógica)
+   */
+  private getRootKeywordItems(): vscode.TreeItem[] {
+    const keywordItems: vscode.TreeItem[] = [];
+
+    // Intentamos ordenar las palabras clave según la configuración
+    const keywordRules = getKeywordRulesFromConfig();
+    const orderedKeywords = keywordRules.map(rule => rule.text.toUpperCase());
+
+    for (const keyword of orderedKeywords) {
+      // Solo mostrar la palabra clave si encontramos TODOs para ella
+      if (this.todoDataByKeyword.has(keyword)) {
+        const treeItem = new vscode.TreeItem(
+          keyword, // "TODO", "FIXME", etc.
+          vscode.TreeItemCollapsibleState.Collapsed
+        );
+        treeItem.contextValue = 'keyword'; // ¡NUEVO! Identificador de tipo
+        keywordItems.push(treeItem);
+      }
+    }
+    return keywordItems;
+  }
+
+  /**
+   * Devuelve los ítems hijo para un Archivo.
+   * (Esta es tu lógica antigua, sin cambios)
+   */
+  private getTodoItemsForFile(fileElement: vscode.TreeItem): vscode.TreeItem[] {
+    const filePath = fileElement.resourceUri?.fsPath;
+
+    if (filePath && this.todoDataByFile.has(filePath)) {
+      const todosInFile = this.todoDataByFile.get(filePath)!;
+
+      return todosInFile.map(todo => {
+        const treeItem = new vscode.TreeItem(
+          todo.lineText,
+          vscode.TreeItemCollapsibleState.None
+        );
+
+        treeItem.description = `Línea ${todo.lineNumber + 1}`;
+        treeItem.tooltip = `Línea ${todo.lineNumber + 1}: ${todo.lineText}`;
+        treeItem.command = {
+          command: 'sidetask.openFile',
+          title: 'Abrir Archivo',
+          arguments: [todo]
+        };
+        return treeItem;
+      });
+    }
+    return [];
+  }
+
+  /**
+   * Devuelve los ítems hijo para una Palabra Clave.
+   * (Esta es la nueva lógica)
+   */
+  private getTodoItemsForKeyword(keywordElement: vscode.TreeItem): vscode.TreeItem[] {
+    const keyword = keywordElement.label as string; // El label es "TODO", "FIXME"
+
+    if (keyword && this.todoDataByKeyword.has(keyword)) {
+      const todosForKeyword = this.todoDataByKeyword.get(keyword)!;
+
+      return todosForKeyword.map(todo => {
+        const relativePath = vscode.workspace.asRelativePath(todo.uri);
+
+        // Formato de etiqueta: "src/cart.cs: // TODO: Considerar..."
+        const label = `${relativePath}: ${todo.lineText}`;
+
+        const treeItem = new vscode.TreeItem(
+          label,
+          vscode.TreeItemCollapsibleState.None
+        );
+
+        treeItem.description = `Línea ${todo.lineNumber + 1}`;
+        treeItem.tooltip = `${relativePath} (Línea ${todo.lineNumber + 1})\n${todo.lineText}`;
+        treeItem.command = {
+          command: 'sidetask.openFile',
+          title: 'Abrir Archivo',
+          arguments: [todo]
+        };
+
+        return treeItem;
+      });
+    }
+    return [];
   }
 }

@@ -59,13 +59,18 @@ export function activate(context: vscode.ExtensionContext) {
 		let refreshTreeView = false;
 		let updateStyles = false;
 
-		if (e.affectsConfiguration('sidetask.keywordRules')) {
-			// Si cambian las reglas, hay que refrescar todo
+		if (e.affectsConfiguration('sidetask.keywordRules') || e.affectsConfiguration('sidetask.tree.groupBy')) {
+			// Si cambian las reglas O el modo de agrupación,
+			// hay que refrescar el árbol
 			refreshTreeView = true;
+		}
+
+		if (e.affectsConfiguration('sidetask.keywordRules')) {
+			// Si cambian las reglas, también hay que actualizar los estilos
 			updateStyles = true;
 		}
 		if (e.affectsConfiguration('sidetask.highlight.enabled')) {
-			// Si solo se (des)activa el highlight, no hace falta refrescar el árbol
+			// Si se (des)activa el highlight, también hay que actualizar los estilos
 			updateStyles = true;
 		}
 

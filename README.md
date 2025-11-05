@@ -23,6 +23,7 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 
 ### NEW 🎆
 * **✨ Custom Highlighting:** Define your own keywords (like `NOTE`, `BUG`) and give them custom colors.
+* **🎛️ Advanced Filtering:** Filter tasks by keyword.
 
 ### Already implemented
 * **🌲 Unified Tree View:** See all found tasks in a clean, collapsible tree view, neatly organized by file.
@@ -39,7 +40,7 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 4. The panel will automatically populate with all the tasks found in your code.
 5. Click any task to jump straight to the file!
 
-## How can I add my word?
+## How can I add my word and configure the colors?
 1. Go to File -> Preferences -> Settings (or keyboard shortcut ctrl+,).
   ![SideTask File -> Preferences -> Settings image](https://github.com/lautaro-rojas/SideTask/blob/main/images/SideTask-FilePrefSett-en.png?raw=true)
 2. Search "SideTask".
@@ -51,7 +52,6 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 ## What's Next? (Roadmap)
 SideTask is just getting started. Our goal is to make this the *ultimate* task management tool for developers, right inside the editor. Here is what's planned:
 
-* **🎛️ Advanced Filtering:** Filter tasks by keyword.
 * **⚡ Smart Snippets:** Quickly create new TODO items with snippets. Type TODO and press Tab autocomplete // TODO: [ ].
 * **⚡ Keyboard shortcuts:** Quickly create new TODO items with keyboard shortcuts.
 * **💡 Icons:** Display a different icon for each keyword type:
@@ -66,6 +66,7 @@ SideTask is just getting started. Our goal is to make this the *ultimate* task m
   - **Dates:** `// REFACTOR: Clean this @due:2025-12-01`.
   - **Status:** `// TODO: Implement function @done`  vs `// TODO: Implement function @pending`.
 * **Markdown Support (`.todo`):** Allows you to manage tasks in dedicated `.md` or `.todo` files. It recognizes Markdown task syntax and adds them to the tree view.
+* **Right-Click Menu:** Context Actions.
 * **🚀 [PRO] Integrations:** Connect SideTask to your favorite tools like **Notion**, **Jira**, and **Trello** to turn code comments into a card.
 * **🚀 [PRO] AI Integrations:** Connect SideTask to your favorite AI like **Chat GPT**.
 

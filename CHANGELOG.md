@@ -64,7 +64,7 @@ This section documents all changes prepared for version v0.2.X.
 
 
 ## [v0.3.0] - 2025-11-05
-This section documents all changes prepared for version v0.2.4.
+This section documents all changes prepared for version v0.3.0.
 
 ### Added
 - **Highlighting in the Editor:** Highlights the entire comment line within the code editor based on the keyword. The colors are customizable. Background and font color.
@@ -74,7 +74,7 @@ This section documents all changes prepared for version v0.2.4.
 
 ### Fixed
 - **Bug 2 - Color in deleted line:** When I delete the line from //TODO: ... which has a color, the line below rises and takes the color of the deleted line.
-- **Bug 3 - Color in new line:** When I'm on a line that has formatting such as font color and background, when I press the enter key on the keyboard, the next line maintains the comment formatting.
+- **Bug 3 - Color in new line:** When I'm on a line that has formatting such as font color and background, when I press the enter key on the keyboard, the next line maintains the comment formatting. Fixed by turning on auto-save.
 
 ### Changed
 

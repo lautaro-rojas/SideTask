@@ -23,8 +23,13 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 
 ### NEW 🎆
 * **✨ Custom Highlighting:** Define your own keywords (like `NOTE`, `BUG`) and give them custom colors.
+  ![SideTask settings highlighting image](/images/SideTask-SettingsHighlighting.png)
+  ![SideTask highlighting image](/images/SideTask-SettingsHighlighting2.png)
 * **🎛️ Advanced Filtering:** Filter tasks by keyword.
+  ![SideTask settings filter image](/images/SideTask-SettingsFilter.png)
+  ![SideTask settings filter 2 image](/images/SideTask-SettingsFilter2.png)
 * **🖱️ Right-Click Menu:** Context Actions: "Go to file", "Delete line", "Copy line".
+  ![SideTask Right-Click Menu image](/images/SideTask-RightClickMenu.png)
 * **💡 Icons:** Display a different icon for each keyword type:
   * 🎯 TODO
   * 🐞 BUG
@@ -33,11 +38,12 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
   * 🔧 FIXME
   * ⚙️ REFACTOR
   
-  You can select which icon to display for each keyword.
+  You can select which icon to display for each keyword!
+  ![SideTask settings emoji image](/images/SideTask-SettingsEmoji.png)
 
 ### Already implemented
 * **🌲 Unified Tree View:** See all found tasks in a clean, collapsible tree view, neatly organized by file.
-* **⌨️ Default Keywords:** Automatically scans your project for `TODO:`, `BUG:`, `IDEA:`, `NOTE:`, `FIXME:`, and `REFACTOR:`.
+* **⌨️ Default Keywords:** Automatically scans your project for `TODO:`, `BUG:`, `IDEA:`, `NOTE:`, `FIXME:` and `REFACTOR:`.
 * **🖱️ Click-to-Go:** Instantly jump to the exact line of any task in your code just by clicking on it in the side panel.
 * **🔄 Manual Refresh:** A simple "Refresh" button in the view's title bar to re-scan your workspace at any time.
 * **🔄 Automatic Refresh:** The extension will re-scan your workspace each time you save a file (ctrl+s).
@@ -50,14 +56,16 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 4. The panel will automatically populate with all the tasks found in your code.
 5. Click any task to jump straight to the file!
 
-## How can I add my word and configure the colors?
-1. Go to File -> Preferences -> Settings (or keyboard shortcut ctrl+,).
+## How can I add my word, configure the colors and the icons?
+1. Go to File -> Preferences -> Settings (or keyboard shortcut `Ctrl + ,`).
   ![SideTask File -> Preferences -> Settings image](https://github.com/lautaro-rojas/SideTask/blob/main/images/SideTask-FilePrefSett-en.png?raw=true)
 2. Search "SideTask".
-3. Go to the option SideTask: Keywords.
-4. Click the button "Add Item".
-  ![SideTask config keywords image](https://github.com/lautaro-rojas/SideTask/blob/main/images/SideTask-ConfigKeywords-en.png?raw=true)
-5. Write your favourite word.
+3. Go to the option SideTask: Keywords Rules.
+4. Click the button "Edit in settings.json".
+  ![SideTask settings keywords image](/images/SideTask-SettingsKeywords.png)
+5. A JSON file will open.
+  ![SideTask settings json image](./images/SideTask-Settingsjson.png)
+6. In this file, you can choose the font color background color, and which emoji will be associated with the keyword. It's recommended that you use the keyboard shortcut `Win + .` to select an icon.
 
 ## What's Next? (Roadmap)
 SideTask is just getting started. Our goal is to make this the *ultimate* task management tool for developers, right inside the editor. Here is what's planned:
@@ -79,6 +87,8 @@ This is an indie project built with ❤️. If you find SideTask useful, please 
 * Leave a ⭐️⭐️⭐️⭐️⭐️ rating on the [Marketplace](https://marketplace.visualstudio.com/items?itemName=LautaroRojas.sidetask).
 * Report bugs or request features on our [GitHub Issues](https://github.com/lautaro-rojas/SideTask/issues).
 * [Buy me a coffee!](https://buymeacoffee.com/lautarorojas) 
+
+![Made in ARGENTINA](https://img.shields.io/badge/Made_in-Argentina-FFFFFF?style=for-the-badge&labelColor=75AADB)
 
 ## License
 

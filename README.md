@@ -24,6 +24,7 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 ### NEW 🎆
 * **✨ Custom Highlighting:** Define your own keywords (like `NOTE`, `BUG`) and give them custom colors.
 * **🎛️ Advanced Filtering:** Filter tasks by keyword.
+* **Right-Click Menu:** Context Actions: "Go to file", "Delete line", "Copy line".
 
 ### Already implemented
 * **🌲 Unified Tree View:** See all found tasks in a clean, collapsible tree view, neatly organized by file.
@@ -66,7 +67,7 @@ SideTask is just getting started. Our goal is to make this the *ultimate* task m
   - **Dates:** `// REFACTOR: Clean this @due:2025-12-01`.
   - **Status:** `// TODO: Implement function @done`  vs `// TODO: Implement function @pending`.
 * **Markdown Support (`.todo`):** Allows you to manage tasks in dedicated `.md` or `.todo` files. It recognizes Markdown task syntax and adds them to the tree view.
-* **Right-Click Menu:** Context Actions.
+* **Right-Click Menu:** Context Actions: Add the option "Edit line".
 * **🚀 [PRO] Integrations:** Connect SideTask to your favorite tools like **Notion**, **Jira**, and **Trello** to turn code comments into a card.
 * **🚀 [PRO] AI Integrations:** Connect SideTask to your favorite AI like **Chat GPT**.
 

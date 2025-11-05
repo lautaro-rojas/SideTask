@@ -28,6 +28,18 @@
         "command": "sidetask.refresh",
         "title": "Refrescar TODOs",
         "icon": "$(refresh)"
+      },
+      {
+        "command": "sidetask.openFile",
+        "title": "Go to file"
+      },
+      {
+        "command": "sidetask.deleteLine",
+        "title": "Delete line"
+      },
+      {
+        "command": "sidetask.copyText",
+        "title": "Copy line"
       }
     ],
     "menus": {
@@ -36,6 +48,23 @@
           "command": "sidetask.refresh",
           "when": "view == todo-tracker-view",
           "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "sidetask.openFile",
+          "when": "view == todo-tracker-view && viewItem == todoItem",
+          "group": "navigation@1"
+        },
+        {
+          "command": "sidetask.copyText",
+          "when": "view == todo-tracker-view && viewItem == todoItem",
+          "group": "copy@1"
+        },
+        {
+          "command": "sidetask.deleteLine",
+          "when": "view == todo-tracker-view && viewItem == todoItem",
+          "group": "modification@1"
         }
       ]
     },
@@ -67,19 +96,19 @@
             "keyword"
           ],
           "enumDescriptions": [
-            "Agrupar TODOs por archivo",
-            "Agrupar TODOs por palabra clave (TODO, FIXME, etc.)"
+            "Gropup TODOs by file",
+            "Gropup TODOs by keyword (TODO, FIXME, etc.)"
           ],
-          "description": "Elige cómo agrupar los ítems en la vista de árbol."
+          "description": "Choose how to group the items in the tree view."
         },
         "sidetask.highlight.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Activa o desactiva el resaltado de líneas de TODOs en el editor."
+          "description": "Toggle the highlighting of TODO lines in the editor."
         },
         "sidetask.keywordRules": {
           "type": "array",
-          "description": "Lista de palabras clave y estilos para buscar.",
+          "description": "List of keywords and styles to search.",
           "default": [
             {
               "text": "TODO",
@@ -103,17 +132,17 @@
             "properties": {
               "text": {
                 "type": "string",
-                "description": "La palabra clave a buscar (ej. 'TODO', 'BUG')."
+                "description": "The keyword to search for (TODO, FIXME, etc.)."
               },
               "color": {
                 "type": "string",
                 "format": "color-hex",
-                "description": "Color del texto (ej. '#FFFFFF')."
+                "description": "Text color ('#FFFFFF')."
               },
               "backgroundColor": {
                 "type": "string",
                 "format": "color-hex",
-                "description": "Color de fondo de la línea (ej. '#FF0000')."
+                "description": "Line background color ('#FF0000')."
               }
             },
             "required": [

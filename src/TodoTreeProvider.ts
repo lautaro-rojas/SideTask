@@ -166,11 +166,12 @@ export class TodoTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem
           vscode.TreeItemCollapsibleState.None
         );
 
-        treeItem.description = `Línea ${todo.lineNumber + 1}`;
-        treeItem.tooltip = `Línea ${todo.lineNumber + 1}: ${todo.lineText}`;
+        treeItem.contextValue = 'todoItem';
+        treeItem.description = `Line ${todo.lineNumber + 1}`;
+        treeItem.tooltip = `Line ${todo.lineNumber + 1}: ${todo.lineText}`;
         treeItem.command = {
           command: 'sidetask.openFile',
-          title: 'Abrir Archivo',
+          title: 'Open file',
           arguments: [todo]
         };
         return treeItem;
@@ -200,11 +201,12 @@ export class TodoTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem
           vscode.TreeItemCollapsibleState.None
         );
 
-        treeItem.description = `Línea ${todo.lineNumber + 1}`;
-        treeItem.tooltip = `${relativePath} (Línea ${todo.lineNumber + 1})\n${todo.lineText}`;
+        treeItem.contextValue = 'todoItem';
+        treeItem.description = `Line ${todo.lineNumber + 1}`;
+        treeItem.tooltip = `${relativePath} (Line ${todo.lineNumber + 1})\n${todo.lineText}`;
         treeItem.command = {
           command: 'sidetask.openFile',
-          title: 'Abrir Archivo',
+          title: 'Open file',
           arguments: [todo]
         };
 

@@ -26,11 +26,25 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	// --- 3. Comandos ---
-	const openFileCommand = vscode.commands.registerCommand('sidetask.openFile', (todo: TodoItem) => {
-		vscode.window.showTextDocument(todo.uri, {
+	const openFileCommand = vscode.commands.registerCommand('sidetask.openFile', (arg: TodoItem | vscode.TreeItem) => {
+
+		let todoToOpen: TodoItem;
+
+		// Comprobamos si el argumento es un TreeItem (clic derecho)
+		// o nuestro TodoItem (clic izquierdo)
+		if (arg instanceof vscode.TreeItem) {
+			// Es un clic derecho, el TodoItem está en los argumentos del comando
+			todoToOpen = arg.command!.arguments![0];
+		} else {
+			// Es un clic izquierdo, el argumento ya es el TodoItem
+			todoToOpen = arg;
+		}
+
+		// El resto de la lógica es la misma
+		vscode.window.showTextDocument(todoToOpen.uri, {
 			selection: new vscode.Selection(
-				new vscode.Position(todo.lineNumber, 0),
-				new vscode.Position(todo.lineNumber, 0)
+				new vscode.Position(todoToOpen.lineNumber, 0),
+				new vscode.Position(todoToOpen.lineNumber, 0)
 			)
 		});
 	});
@@ -85,11 +99,39 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
-	// --- ¡NUEVO LISTENER! ---
 	// Al cambiar de pestaña (editor activo)
 	const activeEditorChange = vscode.window.onDidChangeActiveTextEditor(editor => {
 		if (editor) {
 			triggerHighlightUpdate(editor);
+		}
+	});
+
+	// Comando Copiar Texto
+	const copyTextCommand = vscode.commands.registerCommand('sidetask.copyText', (item: vscode.TreeItem) => {
+		// Obtenemos el TodoItem de los argumentos del comando
+		const todo: TodoItem = item.command!.arguments![0];
+
+		vscode.env.clipboard.writeText(todo.lineText.trim());
+		vscode.window.showInformationMessage('¡TODO copiado al portapapeles!');
+	});
+
+	// Comando Eliminar Línea
+	const deleteLineCommand = vscode.commands.registerCommand('sidetask.deleteLine', async (item: vscode.TreeItem) => {
+		// Obtenemos el TodoItem de los argumentos del comando
+		const todo: TodoItem = item.command!.arguments![0];
+
+		try {
+			const doc = await vscode.workspace.openTextDocument(todo.uri);
+			const range = doc.lineAt(todo.lineNumber).rangeIncludingLineBreak;
+			const edit = new vscode.WorkspaceEdit();
+			edit.delete(todo.uri, range);
+			await vscode.workspace.applyEdit(edit);
+			await doc.save();
+			// (La vista se refrescará sola gracias al auto-refresh)
+			// vscode.window.showInformationMessage('Línea de TODO eliminada.'); // <- Opcional, puede ser molesto
+		} catch (error) {
+			console.error('Error al eliminar la línea:', error);
+			vscode.window.showErrorMessage('Error al eliminar la línea.');
 		}
 	});
 
@@ -98,7 +140,9 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(refreshCommand);
 	context.subscriptions.push(autoRefresh);
 	context.subscriptions.push(configChange);
-	context.subscriptions.push(activeEditorChange); // <-- AÑADIR NUEVO LISTENER
+	context.subscriptions.push(activeEditorChange);
+	context.subscriptions.push(copyTextCommand);
+	context.subscriptions.push(deleteLineCommand);
 
 	// --- 6. Ejecutar el highlighting por primera vez ---
 	if (vscode.window.activeTextEditor) {

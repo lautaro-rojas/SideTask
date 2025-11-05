@@ -5,7 +5,7 @@ import { KeywordRule, TodoItem } from './types';
  * Gestiona el resaltado (decoraciones) de los TODOs en los editores activos.
  */
 export class Highlighter {
-  
+
   // Un mapa para almacenar nuestros "tipos de decoración" (los estilos)
   // Clave: Nombre de la palabra clave (ej. "TODO")
   // Valor: El objeto de decoración de VS Code
@@ -36,14 +36,14 @@ export class Highlighter {
       if (!rule.text || !rule.color || !rule.backgroundColor) {
         continue;
       }
-      
+
       const decorationType = vscode.window.createTextEditorDecorationType({
         // isWholeLine: true -> aplica el estilo a toda la línea
-        isWholeLine: true, 
+        isWholeLine: true,
         backgroundColor: rule.backgroundColor,
         color: rule.color,
       });
-      
+
       // Guardamos el tipo de decoración, usando la palabra clave
       // en mayúsculas como clave
       this.decorationTypes.set(rule.text.toUpperCase(), decorationType);
@@ -57,10 +57,17 @@ export class Highlighter {
    * @param todos La lista de TodoItem encontrados en ese documento.
    */
   public highlightEditor(editor: vscode.TextEditor, todos: TodoItem[]): void {
-    
-    // Un mapa para agrupar las "gamas" (rangos) por tipo de decoración
-    // Clave: El tipo de decoración (el estilo)
-    // Valor: Un array de rangos (las líneas) a las que aplicar ese estilo
+
+    // LIMPIAR TODAS LAS DECORACIONES ANTIGUAS ---
+    // (Esta es la corrección del bug)
+    // Primero, borramos todos los highlights existentes para
+    // evitar "fantasmas" como el que reportaste.
+    for (const decorationType of this.decorationTypes.values()) {
+      editor.setDecorations(decorationType, []);
+    }
+
+
+    // --- PASO 2: Construir el nuevo mapa de decoraciones (lógica existente) ---
     const decorationsMap = new Map<vscode.TextEditorDecorationType, vscode.Range[]>();
 
     // 1. Agrupar los TODOs por su estilo
@@ -79,13 +86,13 @@ export class Highlighter {
       // Creamos un "Rango" para la línea completa
       const range = new vscode.Range(
         new vscode.Position(todo.lineNumber, 0), // Inicio de la línea
-        new vscode.Position(todo.lineNumber, 1000) // Fin de la línea (un número grande basta)
+        new vscode.Position(todo.lineNumber, 1000) // Fin de la línea
       );
-      
+
       decorationsMap.get(decorationType)!.push(range);
     }
 
-    // 2. Aplicar las decoraciones al editor
+    // --- PASO 3: Aplicar las nuevas decoraciones (lógica existente) ---
     for (const [decorationType, ranges] of decorationsMap.entries()) {
       editor.setDecorations(decorationType, ranges);
     }

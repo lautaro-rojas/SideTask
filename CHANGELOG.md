@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Google Tasks Integration:** Add the ability to create cards in Google Tasks.
 - **Chat GPT Integration:** Add the ability to make queries to the AI within the extension.
 - **Bug 1 - Settings UI:** The settings UI doesn't display the correct wording and colors. It shows "Edit in settings.json"
-- **Right-Click Menu:** Context Actions like "Go to file", "Delete line", "Copy"...
+- **Right-Click Menu 2:** Context Actions: "Edit line".
 
 ### Changed
 
@@ -54,8 +54,10 @@ This section documents all changes prepared for version v0.2.4.
 ### Added
 - **Highlighting in the Editor:** Highlights the entire comment line within the code editor based on the keyword. The colors are customizable. Background and font color.
 - **Filtering:** Filter tasks by keyword.
+- **Right-Click Menu 1:** Context Actions like "Go to file", "Delete line", "Copy line".
 
 ### Fixed
+- **Bug 2 - Color in deleted line:** When I delete the line from //TODO: ... which has a color, the line below rises and takes the color of the deleted line.
 
 ### Changed
 

@@ -62,11 +62,12 @@ This section documents all changes prepared for version v0.2.X.
 ### Changed
 -->
 
-## [v0.4.0] - 2025-11-19
+## [v0.4.0] - 2025-11-20
 This section documents all changes prepared for version v0.4.0.
 
 ### Added
 - **Ignore files:** Added a feature to ignore specific routes and files.
+- **Number of items:** A feature was added that counts the number of items according to the grouping.
 
 ### Fixed
 

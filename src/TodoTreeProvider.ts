@@ -126,9 +126,15 @@ export class TodoTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem
         vscode.TreeItemCollapsibleState.Collapsed
       );
 
+      // Obtenemos los todos para saber cuántos hay
+      const todos = this.todoDataByFile.get(filePath);
+      if (todos) {
+        treeItem.description = `${todos.length}`; // Muestra el número (ej. "3")
+      }
+
       treeItem.iconPath = new vscode.ThemeIcon('file');
       treeItem.resourceUri = fileUri; // Importante para encontrar a los hijos
-      treeItem.contextValue = 'file';  // ¡NUEVO! Identificador de tipo
+      treeItem.contextValue = 'file';  // Identificador de tipo
 
       fileItems.push(treeItem);
     }
@@ -146,7 +152,6 @@ export class TodoTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem
     // Intentamos ordenar las palabras clave según la configuración
     const keywordRules = getKeywordRulesFromConfig();
 
-    // --- ¡ESTE ES EL BUCLE CORREGIDO! ---
     // Iteramos sobre 'keywordRules' (los objetos) para poder acceder a 'rule.emoji'
     for (const rule of keywordRules) {
       const keyword = rule.text.toUpperCase();
@@ -158,10 +163,16 @@ export class TodoTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem
         const label = showEmojis && rule.emoji ? `${rule.emoji} ${keyword}` : keyword;
 
         const treeItem = new vscode.TreeItem(
-          label, // <-- Usamos el label que acabamos de crear
+          label, // Usamos el label que acabamos de crear
           vscode.TreeItemCollapsibleState.Collapsed
         );
-        treeItem.contextValue = 'keyword'; // ¡NUEVO! Identificador de tipo
+
+        const todos = this.todoDataByKeyword.get(keyword);
+        if (todos) {
+           treeItem.description = `${todos.length}`; // Muestra el número
+        }
+        
+        treeItem.contextValue = 'keyword'; // Identificador de tipo
         keywordItems.push(treeItem);
       }
     }

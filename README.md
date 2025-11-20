@@ -19,9 +19,15 @@
 
 Stop losing track of pending tasks and technical debt. If it's in your code, it's on your list.
 
-## Features (v0.3.0)
+## Features (v1.0.0)
 
 ### NEW 🎆
+- **Ignore files:** Added a feature to ignore specific routes and files.
+- **Number of items:** A feature was added that counts the number of items according to the grouping.
+  ![SideTask number of items image](/images/SideTask-NumberOfItems.png)
+  ![SideTask number of items image](/images/SideTask-NumberOfItems2.png)
+
+### Already implemented
 * **✨ Custom Highlighting:** Define your own keywords (like `NOTE`, `BUG`) and give them custom colors.
   ![SideTask settings highlighting image](/images/SideTask-SettingsHighlighting.png)
   ![SideTask highlighting image](/images/SideTask-SettingsHighlighting2.png)
@@ -41,7 +47,6 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
   You can select which icon to display for each keyword!
   ![SideTask settings emoji image](/images/SideTask-SettingsEmoji.png)
 
-### Already implemented
 * **🌲 Unified Tree View:** See all found tasks in a clean, collapsible tree view, neatly organized by file.
 * **⌨️ Default Keywords:** Automatically scans your project for `TODO:`, `BUG:`, `IDEA:`, `NOTE:`, `FIXME:` and `REFACTOR:`.
 * **🖱️ Click-to-Go:** Instantly jump to the exact line of any task in your code just by clicking on it in the side panel.
@@ -57,8 +62,7 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 5. Click any task to jump straight to the file!
 
 ## How can I add my word, configure the colors and the icons?
-1. Go to File -> Preferences -> Settings (or keyboard shortcut `Ctrl + ,`).
-  ![SideTask File -> Preferences -> Settings image](https://github.com/lautaro-rojas/SideTask/blob/main/images/SideTask-FilePrefSett-en.png?raw=true)
+1. Go to Settings (File -> Preferences -> Settings or keyboard shortcut `Ctrl + ,`).
 2. Search "SideTask".
 3. Go to the option SideTask: Keywords Rules.
 4. Click the button "Edit in settings.json".
@@ -66,6 +70,18 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 5. A JSON file will open.
   ![SideTask settings json image](./images/SideTask-Settingsjson.png)
 6. In this file, you can choose the font color background color, and which emoji will be associated with the keyword. It's recommended that you use the keyboard shortcut `Win + .` to select an icon.
+
+## How can I ignore a files or folders?
+1. Go to Settings (File -> Preferences -> Settings or keyboard shortcut `Ctrl + ,`).
+2. Search "SideTask".
+3. Go to the option SideTask: Ignore.
+  ![SideTask settings exclude image](/images/SideTask-SettingsIgnore.png)
+4. Add the file or folder you want to ignore using the following format:
+    - File: `**/filename.cs`
+    - Folder: `**/foldername/**`
+
+Note: By default, SideTask ignores the following paths: 
+`**/node_modules/**`,`**/dist/**`,`**/out/**"`, `**/.git/**`, `**/.DS_Store/**`, `**/bin/**`, `**/obj/**`.
 
 ## What's Next? (Roadmap)
 SideTask is just getting started. Our goal is to make this the *ultimate* task management tool for developers, right inside the editor. Here is what's planned:

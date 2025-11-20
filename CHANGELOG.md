@@ -62,8 +62,8 @@ This section documents all changes prepared for version v0.2.X.
 ### Changed
 -->
 
-## [v0.4.0] - 2025-11-20
-This section documents all changes prepared for version v0.4.0.
+## [v1.0.0] - 2025-11-20
+This section documents all changes prepared for version v1.0.0.
 
 ### Added
 - **Ignore files:** Added a feature to ignore specific routes and files.

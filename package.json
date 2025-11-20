@@ -2,7 +2,7 @@
   "name": "sidetask",
   "displayName": "SideTask - All in One TODO extension",
   "description": "Find and manage all your TODOs, FIXMEs, and coding tasks in one place.",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "publisher": "LautaroRojas",
   "repository": {
     "type": "git",

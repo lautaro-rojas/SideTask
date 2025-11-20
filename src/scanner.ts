@@ -1,7 +1,7 @@
-// src/scanner.ts
 import * as vscode from 'vscode';
-import { TodoItem, KeywordRule } from './types'
+import { TodoItem, KeywordRule } from './types';
 import { parseDocument } from './parser';
+import { getExcludedPatterns } from './utils';
 
 /**
  * Lee la configuración de VS Code para obtener las KeywordRules.
@@ -26,15 +26,25 @@ export async function scanWorkspace(): Promise<TodoItem[]> {
 
     const allTodoItems: TodoItem[] = [];
 
-    // 1. Leer las REGLAS desde la configuración
+    // Leer las REGLAS desde la configuración
     const keywordRules = getKeywordRulesFromConfig();
     if (keywordRules.length === 0) {
         // No mostramos un mensaje, simplemente no encontramos nada.
         // El usuario puede no querer usar la extensión.
         return [];
     }
+    // Obtenemos los patrones de exclusión
+    const excludePatterns = getExcludedPatterns();
 
-    const files = await vscode.workspace.findFiles('**/*', '**/node_modules/**');
+    // Construimos el string de exclusión para findFiles.
+    // findFiles espera un string separado por comas o un GlobPattern.
+    // Un string como "{**/node_modules/**,**/dist/**}" funciona bien.
+    const excludeString = excludePatterns.length > 0
+        ? `{${excludePatterns.join(',')}}`
+        : undefined;
+
+    // 3. Pasamos el string de exclusión a findFiles
+    const files = await vscode.workspace.findFiles('**/*', excludeString);
 
     for (const file of files) {
         let document;

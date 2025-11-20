@@ -1,16 +1,18 @@
 import * as vscode from 'vscode';
 import { TodoTreeProvider } from './TodoTreeProvider';
-import { TodoItem, KeywordRule } from './types'; // <-- TIPO ACTUALIZADO
-import { Highlighter } from './highlighter'; // <-- IMPORTAR HIGHLIGHTER
-import { parseDocument } from './parser'; // <-- IMPORTAR PARSER
-import { getKeywordRulesFromConfig } from './scanner'; // <-- IMPORTAR FUNCIÓN
+import { TodoItem, KeywordRule } from './types';
+import { Highlighter } from './highlighter';
+import { parseDocument } from './parser';
+import { getKeywordRulesFromConfig } from './scanner';
+import { isExcluded } from './utils';
 
 // --- Variable Global para el Highlighter ---
 let highlighter: Highlighter;
 
 export function activate(context: vscode.ExtensionContext) {
 
-	console.log('Congratulations, your extension "sidetask" is now active!');
+	console.log('Congratulations, your extension "SideTask" is now active!');
+	vscode.window.showInformationMessage('SideTask is now active!', 'Lets go! 🎉');
 
 	// --- 1. Inicializar el Highlighter ---
 	highlighter = new Highlighter();
@@ -73,10 +75,11 @@ export function activate(context: vscode.ExtensionContext) {
 		let refreshTreeView = false;
 		let updateStyles = false;
 
-		if (e.affectsConfiguration('sidetask.keywordRules') || e.affectsConfiguration('sidetask.tree.groupBy') || e.affectsConfiguration('sidetask.tree.showEmojis')) {
+		if (e.affectsConfiguration('sidetask.keywordRules') || e.affectsConfiguration('sidetask.tree.groupBy') || e.affectsConfiguration('sidetask.tree.showEmojis') || e.affectsConfiguration('sidetask.exclude')) {
 			// Si cambian las reglas O el modo de agrupación,
 			// hay que refrescar el árbol
 			refreshTreeView = true;
+			updateStyles = true;
 		}
 
 		if (e.affectsConfiguration('sidetask.keywordRules')) {
@@ -95,8 +98,13 @@ export function activate(context: vscode.ExtensionContext) {
 			triggerHighlightUpdate();
 		}
 		if (refreshTreeView) {
-			todoTreeProvider.refresh();
-		}
+            // --- CAMBIO AQUÍ: Añadimos un pequeño retraso ---
+            // Damos 250ms a VS Code para que procese el cambio de configuración
+            // interno antes de pedirle que busque archivos de nuevo.
+            setTimeout(() => {
+                todoTreeProvider.refresh();
+            }, 250);
+        }
 	});
 
 	// Al cambiar de pestaña (editor activo)
@@ -112,7 +120,7 @@ export function activate(context: vscode.ExtensionContext) {
 		const todo: TodoItem = item.command!.arguments![0];
 
 		vscode.env.clipboard.writeText(todo.lineText.trim());
-		vscode.window.showInformationMessage('¡TODO copiado al portapapeles!');
+		vscode.window.showInformationMessage('Line copied to the clipboard.');
 	});
 
 	// Comando Eliminar Línea
@@ -128,10 +136,10 @@ export function activate(context: vscode.ExtensionContext) {
 			await vscode.workspace.applyEdit(edit);
 			await doc.save();
 			// (La vista se refrescará sola gracias al auto-refresh)
-			// vscode.window.showInformationMessage('Línea de TODO eliminada.'); // <- Opcional, puede ser molesto
+			vscode.window.showInformationMessage('Line deleted.');
 		} catch (error) {
-			console.error('Error al eliminar la línea:', error);
-			vscode.window.showErrorMessage('Error al eliminar la línea.');
+			console.error('Error deleting line:', error);
+			vscode.window.showErrorMessage('Error deleting line.');
 		}
 	});
 
@@ -165,6 +173,11 @@ function updateDecorationStyles() {
 function triggerHighlightUpdate(editor?: vscode.TextEditor) {
 	const activeEditor = editor || vscode.window.activeTextEditor;
 	if (!activeEditor) {
+		return;
+	}
+
+	if (isExcluded(activeEditor.document.uri.fsPath)) {
+		highlighter.clearHighlights(activeEditor);
 		return;
 	}
 

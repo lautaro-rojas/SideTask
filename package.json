@@ -181,6 +181,22 @@
               "backgroundColor"
             ]
           }
+        },
+        "sidetask.exclude": {
+          "type": "array",
+          "default": [
+            "**/node_modules/**",
+            "**/dist/**",
+            "**/out/**",
+            "**/.git/**",
+            "**/.DS_Store/**",
+            "**/bin/**",
+            "**/obj/**"
+          ],
+          "description": "File and folder paths to ignore (**/folder/** and **/file.cs).",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
@@ -197,6 +213,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
+    "@types/minimatch": "^5.1.2",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
     "@types/vscode": "^1.105.0",
@@ -209,5 +226,8 @@
     "typescript": "^5.9.3",
     "webpack": "^5.102.1",
     "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "minimatch": "^10.1.1"
   }
 }

@@ -228,8 +228,6 @@ export class TodoTreeProvider implements vscode.TreeDataProvider<vscode.TreeItem
 
       return todosForKeyword.map(todo => {
         const relativePath = vscode.workspace.asRelativePath(todo.uri);
-
-        // Formato de etiqueta: "src/cart.cs: // TODO: Considerar..."
         const baseLabel = `${relativePath}: ${todo.lineText}`;
         const label = showEmojis && todo.style.emoji
           ? `${todo.style.emoji} ${baseLabel}`

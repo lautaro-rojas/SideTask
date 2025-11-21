@@ -98,7 +98,7 @@ export function activate(context: vscode.ExtensionContext) {
 			triggerHighlightUpdate();
 		}
 		if (refreshTreeView) {
-            // --- CAMBIO AQUÍ: Añadimos un pequeño retraso ---
+            // Añadimos un pequeño retraso
             // Damos 250ms a VS Code para que procese el cambio de configuración
             // interno antes de pedirle que busque archivos de nuevo.
             setTimeout(() => {

@@ -62,6 +62,19 @@ This section documents all changes prepared for version v0.2.X.
 ### Changed
 -->
 
+## [v1.0.1] - 2025-11-21
+This section documents all changes prepared for version v1.0.1.
+
+### Added
+
+### Fixed
+
+### Changed
+- **README:** Update README.md with download badge and table of contents.
+- **Package:** Update package.json with categories and tags.
+
+### Removed
+
 ## [v1.0.0] - 2025-11-20
 This section documents all changes prepared for version v1.0.0.
 
@@ -72,6 +85,8 @@ This section documents all changes prepared for version v1.0.0.
 ### Fixed
 
 ### Changed
+
+### Removed
 
 ## [v0.3.0] - 2025-11-05
 This section documents all changes prepared for version v0.3.0.
@@ -88,6 +103,10 @@ This section documents all changes prepared for version v0.3.0.
 
 ### Changed
 
+### Removed
+- **README:** Deleted README.es.md
+- **CHANGELOG:** Deleted CHANGELOG.es.md
+
 ## [v0.2.3] - 2025-10-28
 This section documents all changes prepared for version v0.2.3.
 
@@ -97,6 +116,8 @@ This section documents all changes prepared for version v0.2.3.
 
 ### Changed
 - **README:** Update README.md with images.
+
+### Removed
 
 ## [v0.2.2] - 2025-10-28
 This section documents all changes prepared for version v0.2.2.
@@ -112,6 +133,8 @@ This section documents all changes prepared for version v0.2.2.
 - **README:** Update README.md
 - **CHANGELOG:** Update CHANGELOG.md
 
+### Removed
+
 ## [v0.2.1] - 2025-10-27
 This section documents all changes prepared for version v0.2.1.
 
@@ -121,6 +144,8 @@ This section documents all changes prepared for version v0.2.1.
 - **Images in README:** Images in README.md fixed.
 
 ### Changed
+
+### Removed
 
 ## [v0.2.0] - 2025-10-27
 This section documents all changes prepared for version v0.2.0.
@@ -141,6 +166,8 @@ This section documents all changes prepared for version v0.1.2.
 
 ### Changed
 - **Icon:** Changed the marketplace icon.
+
+### Removed
 
 ## [v0.1.1] - 2025-10-24
 This section documents all changes prepared for version v0.1.1.

@@ -12,10 +12,40 @@
   "engines": {
     "vscode": "^1.105.0"
   },
+  /*
+  "galleryBanner": {
+		"color": "#0f172a",
+		"theme": "dark"
+	}, */
   "categories": [
-    "Other",
-    "Linters"
+    "Notebooks",
+    "Linters",
+    "Other"
   ],
+  "keywords": [
+		"todo",
+		"todos",
+		"note",
+		"notes",
+    "note-taking",
+    "annotation",
+		"markdown",
+		"code highlighting",
+    "task",
+		"tasks",
+    "tasklist",
+		"list",
+		"checklist",
+		"productivity",
+		"management",
+		"code snippets",
+		"snippets",
+    "fixme",
+    "developer tools",
+    "highlight",
+    "highlighting",
+    "keyword"
+	],
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
@@ -26,7 +56,7 @@
       },
       {
         "command": "sidetask.refresh",
-        "title": "Refrescar TODOs",
+        "title": "Refresh TODOs",
         "icon": "$(refresh)"
       },
       {

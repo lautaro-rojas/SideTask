@@ -1,7 +1,7 @@
 # SideTask - All in one smart TODO Manager
 
 <p align="center">
-  <img src="https://github.com/lautaro-rojas/SideTask/blob/main/images/SideTask-Logo.png?raw=true" alt="SideTask Logo" width="128" />
+  <img src="https://github.com/lautaro-rojas/SideTask/blob/main/images/SideTask-Logo.png?raw=true" alt="SideTask Logo" width="300" />
   <br/>
   <strong>Your entire codebase's TODO list, in one place.</strong>
 </p>
@@ -13,15 +13,33 @@
   <a href="https://marketplace.visualstudio.com/items?itemName=LautaroRojas.sidetask">
     <img src="https://img.shields.io/visual-studio-marketplace/d/LautaroRojas.sidetask?style=for-the-badge&label=Installs" alt="Marketplace Installs"/>
   </a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=LautaroRojas.sidetask">
+    <img src="https://img.shields.io/visual-studio-marketplace/d/LautaroRojas.sidetask?style=for-the-badge&label=Downloads" alt="Marketplace Downloads"/>
+  </a>
+  <!-- 
+  <a href="https://marketplace.visualstudio.com/items?itemName=LautaroRojas.sidetask">
+    <img src="https://img.shields.io/visual-studio-marketplace/d/LautaroRojas.sidetask?style=for-the-badge&label=Rating" alt="Marketplace Rating"/>
+  </a>
+  -->
 </p>
 
 **SideTask** is a powerful VS Code extension that finds all the TODOs, FIXMEs, and other task comments scattered across your project and brings them into one organized view in your activity bar.
 
 Stop losing track of pending tasks and technical debt. If it's in your code, it's on your list.
 
-## Features (v1.0.0)
+## Table of Contents
+- [New features](#NEW)
+- [Already implemented](#Already-implemented)
+- [Getting started](#getting-started)
+- [Configure the colors and the icons](#how-can-i-add-my-word-configure-the-colors-and-the-icons)
+- [Configure the option to ignore files or folders](#how-can-i-ignore-a-files-or-folders)
+- [Roadmap](#whats-next-roadmap)
+- [Support](#Support-the-Project)
+- [Licence](#license)
 
-### NEW 🎆
+## Features (v1.0.0) 🎆
+
+### NEW
 - **Ignore files:** Added a feature to ignore specific routes and files.
 - **Number of items:** A feature was added that counts the number of items according to the grouping.
   ![SideTask number of items image](/images/SideTask-NumberOfItems.png)

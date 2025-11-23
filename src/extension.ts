@@ -115,6 +115,7 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	// Comando Copiar Texto
+	// BUG: Testeo de todo al cambiar de rama
 	const copyTextCommand = vscode.commands.registerCommand('sidetask.copyText', (item: vscode.TreeItem) => {
 		// Obtenemos el TodoItem de los argumentos del comando
 		const todo: TodoItem = item.command!.arguments![0];

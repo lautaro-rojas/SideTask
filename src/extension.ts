@@ -12,7 +12,14 @@ let highlighter: Highlighter;
 export function activate(context: vscode.ExtensionContext) {
 
 	console.log('Congratulations, your extension "SideTask" is now active!');
-	vscode.window.showInformationMessage('SideTask is now active!', 'Lets go! 🎉');
+	vscode.window.showInformationMessage("SideTask is now active!", "Let's go! 🎉")
+    .then(selection => {
+      if (selection === "Let's go! 🎉") {
+        // Ejecutamos el comando para enfocar nuestra vista específica.
+        // VS Code genera automáticamente este comando usando el ID de tu vista + ".focus"
+        vscode.commands.executeCommand('todo-tracker-view.focus');
+      }
+    });
 
 	// --- 1. Inicializar el Highlighter ---
 	highlighter = new Highlighter();

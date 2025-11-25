@@ -1,6 +1,8 @@
 import * as vscode from 'vscode';
 import { KeywordRule, TodoItem } from './types';
 
+// BUG: Comentario para testear el refresh entre ramas 
+
 /**
  * Gestiona el resaltado (decoraciones) de los TODOs en los editores activos.
  */

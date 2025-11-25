@@ -66,6 +66,7 @@ This section documents all changes prepared for version v1.1.0.
 
 ### Added
 - **Automatic Refresh:** The TODOs view now refreshes automatically when the branch is changed.
+- **Let's Go Button:** The functionality to go to the sidebar when the "Let's go" welcome button is clicked has been added.
 
 ### Fixed
 

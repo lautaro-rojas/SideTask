@@ -11,14 +11,14 @@
     <img src="https://img.shields.io/visual-studio-marketplace/v/LautaroRojas.sidetask?style=for-the-badge&label=Marketplace&color=blue" alt="Marketplace Version"/>
   </a>
   <a href="https://marketplace.visualstudio.com/items?itemName=LautaroRojas.sidetask">
-    <img src="https://img.shields.io/visual-studio-marketplace/d/LautaroRojas.sidetask?style=for-the-badge&label=Installs" alt="Marketplace Installs"/>
+    <img src="https://img.shields.io/visual-studio-marketplace/d/LautaroRojas.sidetask?style=for-the-badge&label=Installs&color=purple" alt="Marketplace Installs"/>
   </a>
   <a href="https://marketplace.visualstudio.com/items?itemName=LautaroRojas.sidetask">
-    <img src="https://img.shields.io/visual-studio-marketplace/d/LautaroRojas.sidetask?style=for-the-badge&label=Downloads" alt="Marketplace Downloads"/>
+    <img src="https://img.shields.io/visual-studio-marketplace/d/LautaroRojas.sidetask?style=for-the-badge&label=Downloads&color=purple" alt="Marketplace Downloads"/>
   </a>
   <!-- 
   <a href="https://marketplace.visualstudio.com/items?itemName=LautaroRojas.sidetask">
-    <img src="https://img.shields.io/visual-studio-marketplace/d/LautaroRojas.sidetask?style=for-the-badge&label=Rating" alt="Marketplace Rating"/>
+    <img src="https://img.shields.io/visual-studio-marketplace/d/LautaroRojas.sidetask?style=for-the-badge&label=Rating&color=purple" alt="Marketplace Rating"/>
   </a>
   -->
 </p>

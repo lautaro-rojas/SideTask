@@ -37,15 +37,16 @@ Stop losing track of pending tasks and technical debt. If it's in your code, it'
 - [Support](#Support-the-Project)
 - [Licence](#license)
 
-## Features (v1.0.0) 🎆
+## Features (v1.1.0) 🎆
 
 ### NEW
+- **Automatic Refresh:** The TODOs view now refreshes automatically when the branch is changed.
+
+### Already implemented
 - **Ignore files:** Added a feature to ignore specific routes and files.
 - **Number of items:** A feature was added that counts the number of items according to the grouping.
   ![SideTask number of items image](/images/SideTask-NumberOfItems.png)
   ![SideTask number of items image](/images/SideTask-NumberOfItems2.png)
-
-### Already implemented
 * **✨ Custom Highlighting:** Define your own keywords (like `NOTE`, `BUG`) and give them custom colors.
   ![SideTask settings highlighting image](/images/SideTask-SettingsHighlighting.png)
   ![SideTask highlighting image](/images/SideTask-SettingsHighlighting2.png)

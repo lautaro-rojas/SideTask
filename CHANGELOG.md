@@ -28,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Trello Integration:** Add the ability to create cards in Trello.
 - **Google Tasks Integration:** Add the ability to create cards in Google Tasks.
 - **Chat GPT Integration:** Add the ability to make queries to the AI within the extension.
-- **Bug 1 - Settings UI:** The settings UI doesn't display the correct wording and colors. It shows "Edit in settings.json"
+- **Bug - Settings UI:** The settings UI doesn't display the correct wording and colors. It shows "Edit in settings.json"
 - **Right-Click Menu 2:** Context Actions: "Edit line".
 <!-- Prompt para - **Right-Click Menu 2:** Context Actions: "Edit line".
 ¡Hola! Quiero continuar con nuestra extensión de VS Code para TODOs.
@@ -61,6 +61,18 @@ This section documents all changes prepared for version v0.2.X.
 
 ### Changed
 -->
+## [v1.1.0] - 2025-11-25
+This section documents all changes prepared for version v1.1.0.
+
+### Added
+- **Automatic Refresh:** The TODOs view now refreshes automatically when the branch is changed.
+
+### Fixed
+
+### Changed
+
+### Removed
+
 
 ## [v1.0.1] - 2025-11-21
 This section documents all changes prepared for version v1.0.1.

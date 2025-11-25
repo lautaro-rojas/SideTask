@@ -98,13 +98,13 @@ export function activate(context: vscode.ExtensionContext) {
 			triggerHighlightUpdate();
 		}
 		if (refreshTreeView) {
-            // Añadimos un pequeño retraso
-            // Damos 250ms a VS Code para que procese el cambio de configuración
-            // interno antes de pedirle que busque archivos de nuevo.
-            setTimeout(() => {
-                todoTreeProvider.refresh();
-            }, 250);
-        }
+			// Añadimos un pequeño retraso
+			// Damos 250ms a VS Code para que procese el cambio de configuración
+			// interno antes de pedirle que busque archivos de nuevo.
+			setTimeout(() => {
+				todoTreeProvider.refresh();
+			}, 250);
+		}
 	});
 
 	// Al cambiar de pestaña (editor activo)
@@ -115,7 +115,6 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	// Comando Copiar Texto
-	// BUG: Testeo de todo al cambiar de rama
 	const copyTextCommand = vscode.commands.registerCommand('sidetask.copyText', (item: vscode.TreeItem) => {
 		// Obtenemos el TodoItem de los argumentos del comando
 		const todo: TodoItem = item.command!.arguments![0];
@@ -144,6 +143,42 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
+	//#region File Watcher para cambios en archivos cuando se cambia de rama
+	// 1. Creamos un vigilante para todos los archivos del proyecto
+	const fileWatcher = vscode.workspace.createFileSystemWatcher('**/*');
+
+	// Variable para el debounce (temporizador)
+	let fsDebounceTimer: NodeJS.Timeout | undefined;
+
+	// Función que maneja el evento con "calma" (debounce)
+	const handleFileSystemEvent = (uri: vscode.Uri) => {
+		// Importante: Ignorar cambios en .git y node_modules para no saturar
+		if (uri.fsPath.includes('.git') || uri.fsPath.includes('node_modules')) {
+			return;
+		}
+
+		// Si ya hay un timer pendiente, lo cancelamos (reinciamos la cuenta)
+		if (fsDebounceTimer) {
+			clearTimeout(fsDebounceTimer);
+		}
+
+		// Esperamos 1 segundo (1000ms) a que el disco se "calme".
+		// Git suele tardar unos milisegundos en cambiar todos los archivos.
+		fsDebounceTimer = setTimeout(() => {
+			console.log('SideTask: External change detected (Git?), refreshing...');
+			todoTreeProvider.refresh();
+			triggerHighlightUpdate();
+		}, 1000);
+	};
+
+	// 2. Conectamos el vigilante a los 3 tipos de eventos posibles
+	//    (Cambio de contenido, Creación de archivo, Borrado de archivo)
+	const watcherChange = fileWatcher.onDidChange(handleFileSystemEvent);
+	const watcherCreate = fileWatcher.onDidCreate(handleFileSystemEvent);
+	const watcherDelete = fileWatcher.onDidDelete(handleFileSystemEvent);
+
+	//#endregion
+
 	// --- 5. Añadir todo a Subscriptions ---
 	context.subscriptions.push(openFileCommand);
 	context.subscriptions.push(refreshCommand);
@@ -152,6 +187,10 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(activeEditorChange);
 	context.subscriptions.push(copyTextCommand);
 	context.subscriptions.push(deleteLineCommand);
+	context.subscriptions.push(fileWatcher);
+	context.subscriptions.push(watcherChange);
+	context.subscriptions.push(watcherCreate);
+	context.subscriptions.push(watcherDelete);
 
 	// --- 6. Ejecutar el highlighting por primera vez ---
 	if (vscode.window.activeTextEditor) {
